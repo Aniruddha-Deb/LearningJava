@@ -1,6 +1,6 @@
 package com.sensei.learningjava;
 
-public class FirstClass {
+public class BubbleSort {
 	
 	private int name[] = { 9, 3, 1, 5, 7, 2, 6 };
 	
@@ -16,7 +16,7 @@ public class FirstClass {
 					name[j+1] = buffer;
 					printArray() ;
 					try{ 
-						Thread.sleep(3000) ; 
+						Thread.sleep(500) ; 
 					}
 					catch( Exception e ){
 					}
@@ -34,7 +34,7 @@ public class FirstClass {
 	}
 
 	public static void main( String[] args ) {
-		FirstClass driver = new FirstClass() ;
+		BubbleSort driver = new BubbleSort() ;
 		
 		System.out.println( "Array before sorting." ) ;
 		driver.printArray() ;
