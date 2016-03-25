@@ -1,4 +1,4 @@
-package com.sensei.learningjava;
+package com.sensei.algorithm;
 
 public class BubbleSort {
 	
