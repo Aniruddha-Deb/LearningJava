@@ -45,7 +45,7 @@ public class Banner {
             Character c     = characters[index] ;
             
             c.print();
-            //System.out.println() ;
+            System.out.println() ;
         }
     }
     
@@ -53,6 +53,6 @@ public class Banner {
         
         Banner banner = new Banner() ;
         banner.loadCharacters() ;
-        banner.printBanner( "ab" ) ;
+        banner.printBanner( "Deba" ) ;
     }
 }
