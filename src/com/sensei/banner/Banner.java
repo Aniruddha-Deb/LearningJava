@@ -38,14 +38,15 @@ public class Banner {
     public void printBanner( String string ) {
         
         String text = string.toUpperCase() ;
-        for( int i=0; i<text.length(); i++ ) {
+        for( int i=text.length()-1; i>=0; i-- ) {
             
             char      ch    = text.charAt(i) ;
             int       index = ch - 'A' ;
             Character c     = characters[index] ;
             
             c.print();
-            System.out.println() ;
+            System.out.println();
+            
         }
     }
     
