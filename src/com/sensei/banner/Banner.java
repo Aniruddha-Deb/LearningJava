@@ -35,10 +35,10 @@ public class Banner {
         characters[25] = new CharacterZ();
     }
 
-    public void printBanner( String string ) {
+    public void printVerticalBanner( String string ) {
         
         String text = string.toUpperCase() ;
-        for( int i=text.length()-1; i>=0; i-- ) {
+        for( int i=0; i<text.length(); i++ ) {
             
             char      ch    = text.charAt(i) ;
             int       index = ch - 'A' ;
@@ -46,7 +46,44 @@ public class Banner {
             
             c.print();
             System.out.println();
-            
+        }
+    }
+    
+    public void printHorizontalBanner( String string ) {
+        
+        StringBuffer lines[] = new StringBuffer[7] ;
+        for( int i=0; i<Character.BITMAP_R; i++ ) {
+            lines[i] = new StringBuffer() ;
+        }
+        
+        String text = string.toUpperCase() ;
+        for( int i=0; i<text.length(); i++ ) {
+            char      ch    = text.charAt(i) ;
+            int       index = ch - 'A' ;
+            Character c     = characters[index] ;
+            appendToLineBuffers( c, lines ) ;
+            appendSpaceToLineBuffers( lines ) ;
+        }
+
+        for( int i=0; i<Character.BITMAP_R; i++ ) {
+            System.out.println( lines[i] ) ;
+        }
+    }
+    
+    private void appendToLineBuffers( Character ch, StringBuffer[] lines ) {
+
+        char[][] bitmap = ch.getBitmap() ;
+        for( int r=0; r<Character.BITMAP_R; r++ ) {
+            for( int c=0; c<Character.BITMAP_C; c++ ) {
+                lines[r].append( bitmap[r][c] ) ;
+            }
+        }
+    }
+    
+    private void appendSpaceToLineBuffers( StringBuffer[] lines ) {
+        
+        for( int r=0; r<Character.BITMAP_R; r++ ) {
+            lines[r].append( "  " ) ;
         }
     }
     
@@ -54,6 +91,6 @@ public class Banner {
         
         Banner banner = new Banner() ;
         banner.loadCharacters() ;
-        banner.printBanner( "Deba" ) ;
+        banner.printHorizontalBanner( "Deba" ) ;
     }
 }

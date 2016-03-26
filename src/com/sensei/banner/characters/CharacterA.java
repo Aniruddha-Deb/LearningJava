@@ -4,13 +4,15 @@ import com.sensei.banner.Character;
 
 public class CharacterA extends Character {
 
-    public void print() {
-        System.out.println( "   #" );
-        System.out.println( "  # #" );
-        System.out.println( " #   #" );
-        System.out.println( "#     #" );
-        System.out.println( "#######" );
-        System.out.println( "#     #" );
-        System.out.println( "#     #" );
+    public CharacterA() {
+        initializeBitmap(
+            "   #",
+            "  # #",
+            " #   #",
+            "#     #",
+            "#######",
+            "#     #",
+            "#     #"
+        ) ;
     }
 }
