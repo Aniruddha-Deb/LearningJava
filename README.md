@@ -6,4 +6,8 @@ The repository is (hopefully) updated daily with new programs
 
 1. Diagonal banner printing
 2. Specify the character to use for banner printing - via command line
-3. Support for italic fonts
+3. Accepting command line arguments for :
+   * banner print character
+   * banner print string
+   * banner print orientation
+   * banner print style (plain, italic)

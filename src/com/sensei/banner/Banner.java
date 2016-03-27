@@ -65,8 +65,12 @@ public class Banner {
             appendSpaceToLineBuffers( lines ) ;
         }
 
-        for( int i=0; i<Character.BITMAP_R; i++ ) {
+        for( int i=0, space = 6; i<Character.BITMAP_R; i++, space--) {
+            for( int j=space; j>=0; j-- ) {
+                System.out.print( " " );
+            }
             System.out.println( lines[i] ) ;
+            try{ Thread.sleep( 500 ); } catch ( Exception e ) {}
         }
     }
     
