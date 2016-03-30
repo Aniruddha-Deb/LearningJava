@@ -105,10 +105,10 @@ public class Banner {
         System.out.println( "Enter direction of banner text: " );
         String direction = read.nextLine();
         
-        if( direction == "Horizontal" ) {
+        if( direction.equals( "Horizontal" ) ) {
             banner.printHorizontalBanner( bannerString );
         }
-        else if( direction == "Vertical" ) {
+        else if( direction.equals( "Vertical" ) ) {
             banner.printVerticalBanner( bannerString );
         }
         else {
