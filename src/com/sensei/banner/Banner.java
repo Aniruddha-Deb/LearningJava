@@ -1,5 +1,7 @@
 package com.sensei.banner;
 
+import java.util.Scanner;
+
 import com.sensei.banner.characters.*;
 
 public class Banner {
@@ -91,10 +93,26 @@ public class Banner {
         }
     }
     
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
+        
+        Scanner read = new Scanner(System.in);
         
         Banner banner = new Banner() ;
         banner.loadCharacters() ;
-        banner.printHorizontalBanner( "Deba" ) ;
+        
+        System.out.println( "Enter banner text: " );
+        String bannerString = read.nextLine();
+        System.out.println( "Enter direction of banner text: " );
+        String direction = read.nextLine();
+        
+        if( direction == "Horizontal" ) {
+            banner.printHorizontalBanner( bannerString );
+        }
+        else if( direction == "Vertical" ) {
+            banner.printVerticalBanner( bannerString );
+        }
+        else {
+            System.out.println( "Test" + direction + bannerString);
+        }
     }
 }
