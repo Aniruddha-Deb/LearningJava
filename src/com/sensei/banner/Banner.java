@@ -2,7 +2,32 @@ package com.sensei.banner;
 
 import java.util.Scanner;
 
-import com.sensei.banner.characters.*;
+import com.sensei.banner.characters.CharacterA;
+import com.sensei.banner.characters.CharacterB;
+import com.sensei.banner.characters.CharacterC;
+import com.sensei.banner.characters.CharacterD;
+import com.sensei.banner.characters.CharacterE;
+import com.sensei.banner.characters.CharacterF;
+import com.sensei.banner.characters.CharacterG;
+import com.sensei.banner.characters.CharacterH;
+import com.sensei.banner.characters.CharacterI;
+import com.sensei.banner.characters.CharacterJ;
+import com.sensei.banner.characters.CharacterK;
+import com.sensei.banner.characters.CharacterL;
+import com.sensei.banner.characters.CharacterM;
+import com.sensei.banner.characters.CharacterN;
+import com.sensei.banner.characters.CharacterO;
+import com.sensei.banner.characters.CharacterP;
+import com.sensei.banner.characters.CharacterQ;
+import com.sensei.banner.characters.CharacterR;
+import com.sensei.banner.characters.CharacterS;
+import com.sensei.banner.characters.CharacterT;
+import com.sensei.banner.characters.CharacterU;
+import com.sensei.banner.characters.CharacterV;
+import com.sensei.banner.characters.CharacterW;
+import com.sensei.banner.characters.CharacterX;
+import com.sensei.banner.characters.CharacterY;
+import com.sensei.banner.characters.CharacterZ;
 
 public class Banner {
     
@@ -37,59 +62,43 @@ public class Banner {
         characters[25] = new CharacterZ();
     }
 
-    public void printVerticalBanner( String string ) {
-        
-        String text = string.toUpperCase() ;
-        for( int i=0; i<text.length(); i++ ) {
-            
-            char      ch    = text.charAt(i) ;
-            int       index = ch - 'A' ;
-            Character c     = characters[index] ;
-            
-            c.print();
-            System.out.println();
-        }
-    }
-    
-    public void printHorizontalBanner( String string ) {
-        
-        StringBuffer lines[] = new StringBuffer[7] ;
-        for( int i=0; i<Character.BITMAP_R; i++ ) {
-            lines[i] = new StringBuffer() ;
-        }
+    private void printVertical( String string, boolean italics ) {
         
         String text = string.toUpperCase() ;
         for( int i=0; i<text.length(); i++ ) {
             char      ch    = text.charAt(i) ;
             int       index = ch - 'A' ;
             Character c     = characters[index] ;
-            appendToLineBuffers( c, lines ) ;
-            appendSpaceToLineBuffers( lines ) ;
-        }
-
-        for( int i=0, space = 6; i<Character.BITMAP_R; i++, space--) {
-            for( int j=space; j>=0; j-- ) {
-                System.out.print( " " );
+            Line      line  = new Line() ;
+            
+            line.appendToLine( c ) ;
+            if( italics ) {
+                line.printItalics() ;
             }
-            System.out.println( lines[i] ) ;
-            try{ Thread.sleep( 500 ); } catch ( Exception e ) {}
+            else {
+                line.print() ;
+            }
+            System.out.println() ;
         }
     }
     
-    private void appendToLineBuffers( Character ch, StringBuffer[] lines ) {
-
-        char[][] bitmap = ch.getBitmap() ;
-        for( int r=0; r<Character.BITMAP_R; r++ ) {
-            for( int c=0; c<Character.BITMAP_C; c++ ) {
-                lines[r].append( bitmap[r][c] ) ;
-            }
-        }
-    }
-    
-    private void appendSpaceToLineBuffers( StringBuffer[] lines ) {
+    private void printHorizontal( String string, boolean italics ) {
         
-        for( int r=0; r<Character.BITMAP_R; r++ ) {
-            lines[r].append( "  " ) ;
+        String text = string.toUpperCase() ;
+        Line   line = new Line() ;
+        for( int i=0; i<text.length(); i++ ) {
+            char      ch    = text.charAt(i) ;
+            int       index = ch - 'A' ;
+            Character c     = characters[index] ;
+            line.appendToLine( c ) ;
+            line.appendSpaceToLine() ;
+        }
+        
+        if( italics ) {
+            line.printItalics() ;
+        }
+        else {
+            line.print()  ;
         }
     }
     
@@ -105,14 +114,22 @@ public class Banner {
         System.out.println( "Enter direction of banner text: " );
         String direction = read.nextLine();
         
-        if( direction.equals( "Horizontal" ) ) {
-            banner.printHorizontalBanner( bannerString );
+        if( direction.equals( "H" ) ) {
+            banner.printHorizontal( bannerString, false );
         }
-        else if( direction.equals( "Vertical" ) ) {
-            banner.printVerticalBanner( bannerString );
+        else if( direction.equals( "HI" ) ) {
+            banner.printHorizontal( bannerString, true );
+        }
+        else if( direction.equals( "V" ) ) {
+            banner.printVertical( bannerString, false );
+        }
+        else if( direction.equals( "VI" ) ) {
+            banner.printVertical( bannerString, true );
         }
         else {
-            System.out.println( "Test" + direction + bannerString);
+            System.out.println( "Direction can be either 'V' or 'VI' or 'H' or 'HI'.");
         }
+        
+        read.close() ;
     }
 }

@@ -7,15 +7,6 @@ public class Character {
     
     private char bitmap[][] = new char[BITMAP_R][BITMAP_C] ;
     
-    public void print() {
-        for( int r=0; r<BITMAP_R; r++ ) {
-            for( int c=0; c<BITMAP_C; c++ ) {
-                System.out.print( bitmap[r][c] ) ;
-            }
-            System.out.println() ;
-        }
-    }
-    
     public char[][] getBitmap() {
         return bitmap ;
     }
