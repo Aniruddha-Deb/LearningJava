@@ -1,33 +1,6 @@
 package com.sensei.banner;
 
-import java.util.Scanner;
-
-import com.sensei.banner.characters.CharacterA;
-import com.sensei.banner.characters.CharacterB;
-import com.sensei.banner.characters.CharacterC;
-import com.sensei.banner.characters.CharacterD;
-import com.sensei.banner.characters.CharacterE;
-import com.sensei.banner.characters.CharacterF;
-import com.sensei.banner.characters.CharacterG;
-import com.sensei.banner.characters.CharacterH;
-import com.sensei.banner.characters.CharacterI;
-import com.sensei.banner.characters.CharacterJ;
-import com.sensei.banner.characters.CharacterK;
-import com.sensei.banner.characters.CharacterL;
-import com.sensei.banner.characters.CharacterM;
-import com.sensei.banner.characters.CharacterN;
-import com.sensei.banner.characters.CharacterO;
-import com.sensei.banner.characters.CharacterP;
-import com.sensei.banner.characters.CharacterQ;
-import com.sensei.banner.characters.CharacterR;
-import com.sensei.banner.characters.CharacterS;
-import com.sensei.banner.characters.CharacterT;
-import com.sensei.banner.characters.CharacterU;
-import com.sensei.banner.characters.CharacterV;
-import com.sensei.banner.characters.CharacterW;
-import com.sensei.banner.characters.CharacterX;
-import com.sensei.banner.characters.CharacterY;
-import com.sensei.banner.characters.CharacterZ;
+import com.sensei.banner.characters.*;
 
 public class Banner {
     
@@ -104,32 +77,30 @@ public class Banner {
     
     public static void main( String[] args ) {
         
-        Scanner read = new Scanner(System.in);
+        if( args.length < 1 ) {
+            System.out.println( "Banner: no command line arguments passed" );
+            System.out.println( "Type -help for help on banner" );
+            System.exit( -1 );
+        }
         
         Banner banner = new Banner() ;
         banner.loadCharacters() ;
-        
-        System.out.println( "Enter banner text: " );
-        String bannerString = read.nextLine();
-        System.out.println( "Enter direction of banner text: " );
-        String direction = read.nextLine();
-        
-        if( direction.equals( "H" ) ) {
-            banner.printHorizontal( bannerString, false );
+   
+        if( args[0].equals( "-h" ) ) {
+            banner.printHorizontal( args[1], false );
         }
-        else if( direction.equals( "HI" ) ) {
-            banner.printHorizontal( bannerString, true );
+        else if( args[0].equals( "-hi" ) ) {
+            banner.printHorizontal( args[1], true );
         }
-        else if( direction.equals( "V" ) ) {
-            banner.printVertical( bannerString, false );
+        else if( args[0].equals( "-v" ) ) {
+            banner.printVertical( args[1], false );
         }
-        else if( direction.equals( "VI" ) ) {
-            banner.printVertical( bannerString, true );
+        else if( args[0].equals( "-vi" ) ) {
+            banner.printVertical( args[1], true );
         }
         else {
-            System.out.println( "Direction can be either 'V' or 'VI' or 'H' or 'HI'.");
+            System.out.println( "Banner: Incorrect command." );
+            System.out.println( "Type -help for help on banner" );
         }
-        
-        read.close() ;
     }
 }
