@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class LibraryManager {
     
     private Library library = new Library() ;
-    private Scanner scanner = new Scanner( System.in ) ;
+    public static Scanner scanner = new Scanner( System.in ) ;
     public static String choice;
 
     public String getChoiceForUserRetry() {
@@ -34,10 +34,14 @@ public class LibraryManager {
         Book book = null ;
         
         book = new Book() ;
-        System.out.println( "Enter book name: " );
+        System.out.println( "Enter book Name: " );
         book.setBookName( scanner.nextLine() ) ;
-        System.out.println( "Enter book publisher: " );
-        book.setPublisher( scanner.nextLine() ) ;
+        System.out.println( "Enter book Author: " );
+        book.setAuthor( scanner.nextLine() ) ;
+        System.out.println( "Enter book Genre: " );
+        book.setGenre( scanner.nextLine() );
+        System.out.println( "Enter size of book (in pages): " );
+        book.setPages( scanner.nextInt() );
         
         return book ;
     }
@@ -68,7 +72,7 @@ public class LibraryManager {
                 System.out.println( "" );
             }
             else if( choice.equals( "2" )) {
-                String input;
+                String input = "Y";
                 do {
                     book = manager.createNewBook();
                     manager.addBookToLibrary( book );
@@ -76,7 +80,7 @@ public class LibraryManager {
                 } while( input.equals( "y" ) || input.equals( "Y" ) ); 
             }
             else if( choice.equals( "3" ) ) {
-                new Scanner( System.in ).close();
+                scanner.close();
                 System.exit( -1 );
             }
         } while ( true );

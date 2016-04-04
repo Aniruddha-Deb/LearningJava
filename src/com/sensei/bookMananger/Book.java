@@ -3,10 +3,9 @@ package com.sensei.bookMananger;
 public class Book {
 
     private String bookName;
-    private String publisher;
-    private String subject;  
+    private String author;
+    private String genre;  
     private int    pages;
-    private int    price;
     
     public Book() {
     }
@@ -19,20 +18,20 @@ public class Book {
         this.bookName = bookName;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getPages() {
@@ -43,18 +42,12 @@ public class Book {
         this.pages = pages;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    
     public String toString() {
         StringBuffer buffer = new StringBuffer() ;
-        buffer.append( "Book      : " ).append( bookName ).append( "\n" )
-              .append( "Publisher : " ).append( publisher ).append( "\n" ) ;
+        buffer.append( "Book   : " ).append( bookName ).append( "\n" )
+              .append( "Author : " ).append( author ).append( "\n" )
+              .append( "Genre  : " ).append( genre ).append( "\n" )
+              .append( "Pages  : " ).append( pages ).append( "\n" );
         return buffer.toString() ;
     }
 }
