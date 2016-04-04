@@ -10,12 +10,13 @@ public class LibraryManager {
     public static String choice;
 
     public String getChoiceForUserRetry() {
-        String buffer;
-        System.out.println( "Do you want to enter another book: " );
-        buffer = scanner.nextLine();
+        String buffer = scanner.nextLine() ;
+        while( !buffer.matches( "[YyNn]" ) ) {
+            System.out.println( "Do you want to enter another book: " );
+            buffer = scanner.nextLine();
+        }
         return buffer;
     }
-    
     
     public void addBookToLibrary( Book book ) {
         library.addBook( book ) ;
