@@ -1,14 +1,14 @@
 package com.sensei.bookMananger;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class LibraryManager {
     
-    private Library library = new Library() ;
+    public File library = new File( "/home/sensei/library.txt" );
     public static Scanner scanner = new Scanner( System.in ) ;
     public static String choice;
-
+    
     public String getChoiceForUserRetry() {
         String buffer = scanner.nextLine() ;
         while( !buffer.matches( "[YyNn]" ) ) {
@@ -18,16 +18,35 @@ public class LibraryManager {
         return buffer;
     }
     
-    public void addBookToLibrary( Book book ) {
-        library.addBook( book ) ;
+    public void addBookToLibrary( Book book ) throws IOException{
+        
+        if( !library.exists() ) {
+            library.createNewFile();
+        }
+        
+        FileWriter writer = new FileWriter( library, true );
+        char[] buffer = book.toString().toCharArray();
+        writer.write( buffer );
+        writer.write( "================================================\n" );
+        writer.flush();
+        writer.close(); 
     }
     
-    public void listBooksInLibrary() {
-        ArrayList<Book> books = library.getAllBooks() ;
-        for( Book book : books ) {
-            System.out.println( book ) ;
-            System.out.println( "------------------------------------" );
-        }
+    public void eraseAllBooksInLibrary() throws IOException{
+        
+        FileWriter writer = new FileWriter( library );
+        writer.write( "" );
+        writer.flush();
+        writer.close(); 
+    }
+    
+    public void listBooksInLibrary() throws IOException{
+        FileReader fr = new FileReader( library ); 
+        char[] a = new char[1024];
+        fr.read(a); 
+        for(char c : a)
+            System.out.print(c); 
+        fr.close();
     }
     
     public Book createNewBook() {
@@ -54,16 +73,18 @@ public class LibraryManager {
         System.out.println( "What would you like to do:" );
         System.out.println( "    1) Display books in library" );
         System.out.println( "    2) Add new book to library" );
-        System.out.println( "    3) Exit LibraryManager" );
+        System.out.println( "    3) Erase all books in library" );
+        System.out.println( "    4) Exit LibraryManager" );
         System.out.println( "================================================" );
         System.out.println( "Wating on choice:> " );
         choice = scanner.nextLine();
     }
     
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws Exception{
        
         LibraryManager manager = new LibraryManager() ;
         Book book;
+        String input = "Y";
         
         do {
             manager.printStartMenu();
@@ -73,7 +94,6 @@ public class LibraryManager {
                 System.out.println( "" );
             }
             else if( choice.equals( "2" )) {
-                String input = "Y";
                 do {
                     book = manager.createNewBook();
                     manager.addBookToLibrary( book );
@@ -81,6 +101,17 @@ public class LibraryManager {
                 } while( input.equals( "y" ) || input.equals( "Y" ) ); 
             }
             else if( choice.equals( "3" ) ) {
+                System.out.println( "Are you sure you want to erase all books in your library?" );
+                System.out.println( "Press y to continue, n to abort" );
+                input = manager.getChoiceForUserRetry();
+                if( input.matches( "[Yy]" ) ) {
+                    manager.eraseAllBooksInLibrary();
+                }
+                else{
+                    System.out.println( "Aborting..." );
+                }
+            }
+            else if( choice.equals( "4" )) {
                 scanner.close();
                 System.exit( -1 );
             }
