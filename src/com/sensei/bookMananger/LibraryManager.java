@@ -12,7 +12,7 @@ public class LibraryManager {
     public String getChoiceForUserRetry() {
         String buffer = scanner.nextLine() ;
         while( !buffer.matches( "[YyNn]" ) ) {
-            System.out.println( "Do you want to enter another book: " );
+            System.out.print( "Do you want to enter another book: " );
             buffer = scanner.nextLine();
         }
         return buffer;
@@ -54,13 +54,13 @@ public class LibraryManager {
         Book book = null ;
         
         book = new Book() ;
-        System.out.println( "Enter book Name: " );
+        System.out.print( "Enter book Name: " );
         book.setBookName( scanner.nextLine() ) ;
-        System.out.println( "Enter book Author: " );
+        System.out.print( "Enter book Author: " );
         book.setAuthor( scanner.nextLine() ) ;
-        System.out.println( "Enter book Genre: " );
+        System.out.print( "Enter book Genre: " );
         book.setGenre( scanner.nextLine() );
-        System.out.println( "Enter size of book (in pages): " );
+        System.out.print( "Enter size of book (in pages): " );
         book.setPages( scanner.nextInt() );
         
         return book ;
@@ -76,7 +76,7 @@ public class LibraryManager {
         System.out.println( "    3) Erase all books in library" );
         System.out.println( "    4) Exit LibraryManager" );
         System.out.println( "================================================" );
-        System.out.println( "Wating on choice:> " );
+        System.out.print( "Wating on choice:> " );
         choice = scanner.nextLine();
     }
     
@@ -102,7 +102,7 @@ public class LibraryManager {
             }
             else if( choice.equals( "3" ) ) {
                 System.out.println( "Are you sure you want to erase all books in your library?" );
-                System.out.println( "Press y to continue, n to abort" );
+                System.out.print( "Press y to continue, n to abort" );
                 input = manager.getChoiceForUserRetry();
                 if( input.matches( "[Yy]" ) ) {
                     manager.eraseAllBooksInLibrary();
