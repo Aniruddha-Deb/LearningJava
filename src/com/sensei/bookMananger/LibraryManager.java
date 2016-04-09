@@ -1,13 +1,14 @@
 package com.sensei.bookMananger;
 
-import java.util.Scanner;
 import java.io.*;
+import java.util.Scanner;
 
 public class LibraryManager {
     
-    public File library = new File( "/home/sensei/library.txt" );
+    public File library = new File( "/Users/Sensei/library.txt" );
     public static Scanner scanner = new Scanner( System.in ) ;
     public static String choice;
+    private int nextBookUID = 0;
     
     public String getChoiceForUserRetry() {
         String buffer = scanner.nextLine() ;
@@ -62,6 +63,8 @@ public class LibraryManager {
         book.setGenre( scanner.nextLine() );
         System.out.print( "Enter size of book (in pages): " );
         book.setPages( scanner.nextInt() );
+        book.setBookUID( nextBookUID );
+        nextBookUID++;
         
         return book ;
     }
@@ -90,7 +93,6 @@ public class LibraryManager {
             manager.printStartMenu();
             if( choice.equals( "1" ) ) {
                 manager.listBooksInLibrary();
-                System.out.println( "========================================" );
                 System.out.println( "" );
             }
             else if( choice.equals( "2" )) {

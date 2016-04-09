@@ -6,6 +6,7 @@ public class Book {
     private String author;
     private String genre;  
     private int    pages;
+    private int    bookUID;
     
     public Book() {
     }
@@ -13,7 +14,7 @@ public class Book {
     public String getBookName() {
         return bookName;
     }
-
+    
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
@@ -41,10 +42,19 @@ public class Book {
     public void setPages(int pages) {
         this.pages = pages;
     }
+    
+    public int getBookUID() {
+        return bookUID;
+    }
+    
+    public void setBookUID(int UID) {
+    	this.bookUID = UID;
+    }
 
     public String toString() {
         StringBuffer buffer = new StringBuffer() ;
-        buffer.append( "Book   : " ).append( bookName ).append( "\n" )
+        buffer.append( "UID    : " ).append( bookUID ).append( "\n" )
+        	  .append( "Book   : " ).append( bookName ).append( "\n" )
               .append( "Author : " ).append( author ).append( "\n" )
               .append( "Genre  : " ).append( genre ).append( "\n" )
               .append( "Pages  : " ).append( pages ).append( "\n" );
