@@ -1,6 +1,5 @@
 package com.sensei.bookMananger;
 
-import java.io.*;
 import java.util.Scanner;
 
 public class LibraryManager {
@@ -88,10 +87,11 @@ public class LibraryManager {
                 }
             }
             else if( choice.equals( "4" )) {
+            	library.save();
                 scanner.close();
                 System.exit( -1 );
             }
-        } while ( true );	
+        } while ( true );
     }
     
     public static void main( String[] args ) throws Exception{

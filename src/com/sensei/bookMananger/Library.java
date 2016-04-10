@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Library {
 
-    private ArrayList<Book> books = new ArrayList<>() ;
+    private ArrayList<Book> books = null;
     private Database database = null;
     
     public Library( Database database ){
@@ -21,16 +21,21 @@ public class Library {
     }
     
     public void load() {
-    	
+    	books = database.load();
     }
     
     public void save() {
-    	
+    	database.save( books );
     }
 
 	public void erase() {
+		books.clear();
+		database.save( books );
 	}
-
+	
 	public void list() {
+		for( Book book: books ) {
+			System.out.println( book );
+		}
 	}
 }

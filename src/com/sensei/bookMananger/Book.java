@@ -1,8 +1,11 @@
 package com.sensei.bookMananger;
 
-public class Book {
+import java.io.Serializable;
 
-    private String bookName;
+@SuppressWarnings("serial")
+public class Book implements Serializable{
+
+	private String bookName;
     private String author;
     private String genre;  
     private int    pages;
