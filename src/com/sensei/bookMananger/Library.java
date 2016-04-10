@@ -5,8 +5,11 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> books = new ArrayList<>() ;
+    private Database database = null;
     
-    public Library(){
+    public Library( Database database ){
+    	this.database = database;
+    	load();
     }
     
     public void addBook( Book book ) {
@@ -16,4 +19,18 @@ public class Library {
     public ArrayList<Book> getAllBooks() {
         return books ;
     }
+    
+    public void load() {
+    	
+    }
+    
+    public void save() {
+    	
+    }
+
+	public void erase() {
+	}
+
+	public void list() {
+	}
 }
