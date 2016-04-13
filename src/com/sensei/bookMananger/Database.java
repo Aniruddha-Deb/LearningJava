@@ -39,13 +39,14 @@ public class Database {
 		return books ;
 	}
 
-	public void save(ArrayList<Book> books) {
+	public void save(ArrayList<Book> books, int UID) {
 
 		try {
 			FileOutputStream   fos = new FileOutputStream( file ) ;
 			ObjectOutputStream oos = new ObjectOutputStream( fos ) ;
 			
 			oos.writeObject( books ) ;
+			oos.writeInt( UID );
 			oos.close();
 		}
 		catch( Exception e ){

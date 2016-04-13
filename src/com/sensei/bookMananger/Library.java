@@ -24,13 +24,13 @@ public class Library {
     	books = database.load();
     }
     
-    public void save() {
-    	database.save( books );
+    public void save( int UID ) {
+    	database.save( books, UID );
     }
 
-	public void erase() {
+	public void erase( int UID ) {
 		books.clear();
-		database.save( books );
+		database.save( books, UID );
 	}
 	
 	public void list() {

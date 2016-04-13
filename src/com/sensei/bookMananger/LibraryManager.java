@@ -13,6 +13,7 @@ public class LibraryManager {
     public LibraryManager() {
     	database = new Database();
     	library = new Library( database );
+    	nextBookUID = 0;
     }
     
     public String getChoiceForUserRetry() {
@@ -80,14 +81,14 @@ public class LibraryManager {
                 System.out.print( "Press y to continue, n to abort" );
                 input = getChoiceForUserRetry();
                 if( input.matches( "[Yy]" ) ) {
-                    library.erase();
+                    library.erase( nextBookUID );
                 }
                 else{
                     System.out.println( "Aborting..." );
                 }
             }
             else if( choice.equals( "4" )) {
-            	library.save();
+            	library.save( nextBookUID );
                 scanner.close();
                 System.exit( -1 );
             }
