@@ -7,27 +7,28 @@ import java.io.ObjectOutputStream;
 
 public class writeObjectOutput {
 
-	public static void main(String[] args) {
+	private static int UID = 15;
+	private static int val = 0;
+
+	public static void main(String[] args) throws Exception{
 		
-		int UID = 15;
-		int val = 0;
-		
-		try {
-			FileOutputStream   fos = new FileOutputStream( "/Users/Sensei/test.txt" ) ;
-			ObjectOutputStream oos = new ObjectOutputStream( fos ) ;
-			FileInputStream   fis = new FileInputStream( "/Users/Sensei/test.txt" ) ;
-			ObjectInputStream ois = new ObjectInputStream( fis ) ;
-			
-			oos.writeInt( UID );
-			val = ois.readInt();
-			oos.close();
-			ois.close();
-		}
-		catch( Exception e ){
-			e.printStackTrace( );
-		}
-		
-		System.out.println( val );
+			writeToFile();
+			readToFile();
+			System.out.println( val );
+	}
+	
+	public static void writeToFile() throws Exception{
+		FileOutputStream   fos = new FileOutputStream( "/Users/Sensei/test.txt" ) ;
+		ObjectOutputStream oos = new ObjectOutputStream( fos ) ;
+		oos.writeInt( UID );
+		oos.close();
+	}
+	
+	public static void readToFile() throws Exception{
+		FileInputStream   fis = new FileInputStream( "/Users/Sensei/test.txt" ) ;
+		ObjectInputStream ois = new ObjectInputStream( fis ) ;
+		val = ois.readInt();
+		ois.close();
 		
 	}
 
