@@ -6,36 +6,48 @@ public class Library {
 
     private ArrayList<Book> books = null;
     private Database database = null;
+    private int nextBookUID = 0;
     
     public Library( Database database ){
     	this.database = database;
-    	load();
+    	database.load(this);
     }
     
     public void addBook( Book book ) {
         books.add( book ) ;
+        book.setBookUID( nextBookUID );
+        nextBookUID++;
     }
     
     public ArrayList<Book> getAllBooks() {
         return books ;
     }
     
-    public void load() {
-    	books = database.load();
+    public void setBooks( ArrayList<Book> books ) {
+    	this.books = books;
     }
     
-    public void save( int UID ) {
-    	database.save( books, UID );
+    public void setNextBookUID( int UID ) {
+    	this.nextBookUID = UID;
+    }
+    
+    public void save() {
+    	database.save( this );
     }
 
-	public void erase( int UID ) {
+	public void erase() {
 		books.clear();
-		database.save( books, UID );
+		nextBookUID = 0;
+		database.save( this );
 	}
 	
 	public void list() {
 		for( Book book: books ) {
 			System.out.println( book );
 		}
+	}
+
+	public int getNextBookUID() {
+		return nextBookUID;
 	}
 }

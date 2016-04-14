@@ -17,8 +17,9 @@ public class Database {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Book> load() {
+	public void load( Library library ) {
 		
+		int UID = 0;
 		ArrayList<Book> books = null ;
 		
 		if( file.exists() ) {
@@ -27,6 +28,7 @@ public class Database {
 				ObjectInputStream ois = new ObjectInputStream( fis ) ;
 				
 				books = ( ArrayList<Book> )ois.readObject() ;
+				UID = ois.readInt();
 				ois.close();
 			}
 			catch( Exception e ){
@@ -36,17 +38,21 @@ public class Database {
 		else {
 			books = new ArrayList<>() ;
 		}
-		return books ;
+		library.setBooks( books );
+		library.setNextBookUID( UID );
 	}
+	
+	public void save( Library library ) {
 
-	public void save(ArrayList<Book> books, int UID) {
-
+		ArrayList<Book> books = null ;
+		
 		try {
 			FileOutputStream   fos = new FileOutputStream( file ) ;
 			ObjectOutputStream oos = new ObjectOutputStream( fos ) ;
 			
+			books = library.getAllBooks();
 			oos.writeObject( books ) ;
-			oos.writeInt( UID );
+			oos.writeInt( library.getNextBookUID() );
 			oos.close();
 		}
 		catch( Exception e ){

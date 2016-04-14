@@ -8,15 +8,13 @@ public class LibraryManager {
     private Database database = null;
     private Library library = null;
     public static String choice;
-    private int nextBookUID = 0;
     
     public LibraryManager() {
     	database = new Database();
     	library = new Library( database );
-    	nextBookUID = 0;
     }
     
-    public String getChoiceForUserRetry() {
+	public String getChoiceForUserRetry() {
         String buffer = scanner.nextLine() ;
         while( !buffer.matches( "[YyNn]" ) ) {
             System.out.print( "Do you want to enter another book: " );
@@ -38,8 +36,6 @@ public class LibraryManager {
         book.setGenre( scanner.nextLine() );
         System.out.print( "Enter size of book (in pages): " );
         book.setPages( scanner.nextInt() );
-        book.setBookUID( nextBookUID );
-        nextBookUID++;
         
         return book ;
     }
@@ -58,39 +54,57 @@ public class LibraryManager {
         choice = scanner.nextLine();
     }
     
+    public void displayBooksInLibrary() {
+    	library.list();
+    	System.out.println( "" );
+    }
+    
+    public void addNewBookToLibrary() {
+    	Book book;
+    	String input = "Y";
+        do {
+            book = createNewBook();
+            library.addBook( book );
+            input = getChoiceForUserRetry();
+        } while( input.equals( "y" ) || input.equals( "Y" ) ); 
+    }
+    
+    public void eraseAllBooksInLibrary() {
+    	
+    	String input = "Y";
+    	
+        System.out.println( "Are you sure you want to erase all books in your library?" );
+        System.out.print( "Press y to continue, n to abort: " );
+        input = getChoiceForUserRetry();
+        if( input.matches( "[Yy]" ) ) {
+        	library.erase();
+        }
+        else{
+            System.out.println( "Aborting..." );
+        }
+    }
+    
+    public void exitLibraryManager() {
+        scanner.close();
+        library.save();
+        System.exit( -1 );
+    }
+    
     public void manageLibrary() throws Exception {
     	
-        Book book;
-        String input = "Y";
-        
         do {
             printStartMenu();
             if( choice.equals( "1" ) ) {
-                library.list();
-                System.out.println( "" );
+            	displayBooksInLibrary();
             }
             else if( choice.equals( "2" )) {
-                do {
-                    book = createNewBook();
-                    library.addBook( book );
-                    input = getChoiceForUserRetry();
-                } while( input.equals( "y" ) || input.equals( "Y" ) ); 
+            	addNewBookToLibrary();
             }
             else if( choice.equals( "3" ) ) {
-                System.out.println( "Are you sure you want to erase all books in your library?" );
-                System.out.print( "Press y to continue, n to abort" );
-                input = getChoiceForUserRetry();
-                if( input.matches( "[Yy]" ) ) {
-                    library.erase( nextBookUID );
-                }
-                else{
-                    System.out.println( "Aborting..." );
-                }
+            	eraseAllBooksInLibrary();
             }
             else if( choice.equals( "4" )) {
-            	library.save( nextBookUID );
-                scanner.close();
-                System.exit( -1 );
+            	exitLibraryManager();
             }
         } while ( true );
     }
