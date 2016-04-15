@@ -50,4 +50,15 @@ public class Library {
 	public int getNextBookUID() {
 		return nextBookUID;
 	}
+
+	public void deleteBook( int UID ) {
+		int index = 0;
+		for( int i=0; i<books.size(); i++ ) {
+			if( books.get(i).getBookUID() == UID ) {
+				index = i;
+				break;
+			}
+		}
+		books.remove( index );
+	}
 }

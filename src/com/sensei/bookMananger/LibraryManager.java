@@ -47,8 +47,9 @@ public class LibraryManager {
         System.out.println( "What would you like to do:" );
         System.out.println( "    1) Display books in library" );
         System.out.println( "    2) Add new book to library" );
-        System.out.println( "    3) Erase all books in library" );
-        System.out.println( "    4) Exit LibraryManager" );
+        System.out.println( "    3) Delete a book from the library" );
+        System.out.println( "    4) Erase all books in library" );
+        System.out.println( "    5) Exit LibraryManager" );
         System.out.println( "================================================" );
         System.out.print( "Wating on choice:> " );
         choice = scanner.nextLine();
@@ -67,6 +68,14 @@ public class LibraryManager {
             library.addBook( book );
             input = getChoiceForUserRetry();
         } while( input.equals( "y" ) || input.equals( "Y" ) ); 
+    }
+    
+    private void deleteBookFromLibrary() {
+    	int UID;
+    	System.out.print( "Enter the UID of the book you want to delete: " );
+    	UID = scanner.nextInt();
+    	library.deleteBook( UID );
+    	library.save();
     }
     
     public void eraseAllBooksInLibrary() {
@@ -100,16 +109,19 @@ public class LibraryManager {
             else if( choice.equals( "2" )) {
             	addNewBookToLibrary();
             }
-            else if( choice.equals( "3" ) ) {
+            else if( choice.equals( "3" )) {
+            	deleteBookFromLibrary();
+            }
+            else if( choice.equals( "4" ) ) {
             	eraseAllBooksInLibrary();
             }
-            else if( choice.equals( "4" )) {
+            else if( choice.equals( "5" )) {
             	exitLibraryManager();
             }
         } while ( true );
     }
     
-    public static void main( String[] args ) throws Exception{
+	public static void main( String[] args ) throws Exception{
        
         LibraryManager manager = new LibraryManager() ;
         manager.manageLibrary();
