@@ -1,26 +1,16 @@
 package com.sensei.bookMananger;
 
-import java.util.Scanner;
-
 public class LibraryManager {
     
-    public static Scanner scanner = new Scanner( System.in ) ;
+    private String choice;
     private Database database = null;
     private Library library = null;
-    public static String choice;
+    private ConsoleReader scanner = null ;
     
     public LibraryManager() {
     	database = new Database();
     	library = new Library( database );
-    }
-    
-	public String getChoiceForUserRetry() {
-        String buffer = scanner.nextLine() ;
-        while( !buffer.matches( "[YyNn]" ) ) {
-            System.out.print( "Do you want to enter another book: " );
-            buffer = scanner.nextLine();
-        }
-        return buffer;
+    	scanner = new ConsoleReader() ;
     }
     
     public Book createNewBook() {
@@ -28,14 +18,10 @@ public class LibraryManager {
         Book book = null ;
         
         book = new Book() ;
-        System.out.print( "Enter book Name: " );
-        book.setBookName( scanner.nextLine() ) ;
-        System.out.print( "Enter book Author: " );
-        book.setAuthor( scanner.nextLine() ) ;
-        System.out.print( "Enter book Genre: " );
-        book.setGenre( scanner.nextLine() );
-        System.out.print( "Enter size of book (in pages): " );
-        book.setPages( scanner.nextInt() );
+        book.setBookName( scanner.getString( "Enter book Name: " ) ) ;
+        book.setAuthor( scanner.getString( "Enter book Author: " ) ) ;
+        book.setGenre( scanner.getString( "Enter book Genre: " ) );
+        book.setPages( scanner.getInt( "Enter size of book (in pages): " ) );
         
         return book ;
     }
@@ -51,8 +37,7 @@ public class LibraryManager {
         System.out.println( "    4) Erase all books in library" );
         System.out.println( "    5) Exit LibraryManager" );
         System.out.println( "================================================" );
-        System.out.print( "Wating on choice:> " );
-        choice = scanner.nextLine();
+        choice = scanner.getString( "Wating on choice:> " );
     }
     
     public void displayBooksInLibrary() {
@@ -62,30 +47,24 @@ public class LibraryManager {
     
     public void addNewBookToLibrary() {
     	Book book;
-    	String input = "Y";
+    	boolean loopCondition = true;
         do {
             book = createNewBook();
             library.addBook( book );
-            input = getChoiceForUserRetry();
-        } while( input.equals( "y" ) || input.equals( "Y" ) ); 
+            loopCondition = scanner.getUserConfirmation( "Do you want to enter another book?" ); 
+        } while( loopCondition == true ); 
     }
     
     private void deleteBookFromLibrary() {
     	int UID;
-    	System.out.print( "Enter the UID of the book you want to delete: " );
-    	UID = scanner.nextInt();
+    	UID = scanner.getInt( "Enter the UID of the book you want to delete" ) ;
     	library.deleteBook( UID );
     	library.save();
     }
     
     public void eraseAllBooksInLibrary() {
     	
-    	String input = "Y";
-    	
-        System.out.println( "Are you sure you want to erase all books in your library?" );
-        System.out.print( "Press y to continue, n to abort: " );
-        input = getChoiceForUserRetry();
-        if( input.matches( "[Yy]" ) ) {
+        if( scanner.getUserConfirmation("Are you sure you want to erase all books in your library?") ) {
         	library.erase();
         }
         else{
@@ -94,7 +73,6 @@ public class LibraryManager {
     }
     
     public void exitLibraryManager() {
-        scanner.close();
         library.save();
         System.exit( -1 );
     }
@@ -110,6 +88,7 @@ public class LibraryManager {
             	addNewBookToLibrary();
             }
             else if( choice.equals( "3" )) {
+            	System.out.println( "deleting book from library" );
             	deleteBookFromLibrary();
             }
             else if( choice.equals( "4" ) ) {
