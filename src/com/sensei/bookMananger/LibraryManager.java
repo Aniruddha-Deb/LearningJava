@@ -25,24 +25,39 @@ public class LibraryManager {
         
         return book ;
     }
-    
+
     public void printStartMenu() {
         
         System.out.println( "LibraryManager INDEV");
         System.out.println( "================================================" );
         System.out.println( "What would you like to do:" );
         System.out.println( "    1) Display books in library" );
-        System.out.println( "    2) Add new book to library" );
-        System.out.println( "    3) Delete a book from the library" );
-        System.out.println( "    4) Erase all books in library" );
-        System.out.println( "    5) Exit LibraryManager" );
+        System.out.println( "    2) Search a particular book from the library" );
+        System.out.println( "    3) Add new book to library" );
+        System.out.println( "    4) Delete a book from the library" );
+        System.out.println( "    5) Erase all books in library" );
+        System.out.println( "    6) Exit LibraryManager" );
         System.out.println( "================================================" );
         choice = scanner.getString( "Wating on choice:> " );
     }
     
+    public void printSearchMenu() {
+    	System.out.println( "How would you like to search?" );
+    	System.out.println( "    1) By Name" );
+    	System.out.println( "    2) By Author" );
+    	System.out.println( "    3) By Genre" );
+    	System.out.println( "    4) By Size" );
+    	System.out.println( "=============================" );
+    	choice = scanner.getString( "Waiting on choice:> " );
+    }
+
     public void displayBooksInLibrary() {
     	library.list();
     	System.out.println( "" );
+    }
+    
+    public void searchBookInLibrary() {
+    	printSearchMenu();
     }
     
     public void addNewBookToLibrary() {
@@ -85,16 +100,18 @@ public class LibraryManager {
             	displayBooksInLibrary();
             }
             else if( choice.equals( "2" )) {
-            	addNewBookToLibrary();
+            	searchBookInLibrary();
             }
             else if( choice.equals( "3" )) {
-            	System.out.println( "deleting book from library" );
+            	addNewBookToLibrary();
+            }
+            else if( choice.equals( "4" )) {
             	deleteBookFromLibrary();
             }
-            else if( choice.equals( "4" ) ) {
+            else if( choice.equals( "5" ) ) {
             	eraseAllBooksInLibrary();
             }
-            else if( choice.equals( "5" )) {
+            else if( choice.equals( "6" )) {
             	exitLibraryManager();
             }
         } while ( true );
