@@ -63,22 +63,29 @@ public class Library {
 	}
 
 	public void searchBookByName() {
-		// TODO Auto-generated method stub
+		String name = null;
+		ConsoleReader reader = new ConsoleReader();
+		Book buffer = null;
+		
+		name = reader.getString( "Enter the name of the book" );
+		for( int i=0; i<books.size(); i++ ) {
+			if( books.get(i).getBookName().matches( name ) ) {
+				buffer = books.get(i);
+				System.out.println( buffer );
+			}
+		}
 		
 	}
 
 	public void searchBookByAuthor() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void searchBookByGenre() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void searchBookByNumPages() {
-		// TODO Auto-generated method stub
 		
 	}
 	

@@ -47,6 +47,7 @@ public class LibraryManager {
     	System.out.println( "    2) By Author" );
     	System.out.println( "    3) By Genre" );
     	System.out.println( "    4) By Size" );
+    	System.out.println( "    5) Exit to main menu" );
     	System.out.println( "=============================" );
     	choice = scanner.getString( "Waiting on choice:> " );
     }
@@ -57,19 +58,27 @@ public class LibraryManager {
     }
     
     public void searchBookInLibrary() {
-    	printSearchMenu();
-    	if( choice.equals( "1" ) ) {
-    		library.searchBookByName();
-    	}
-    	else if( choice.equals( "2" ) ) {
-    		library.searchBookByAuthor();
-    	}
-    	else if( choice.equals( "3" ) ) {
-    		library.searchBookByGenre();
-    	}
-       	else if( choice.equals( "4" ) ) {
-       		library.searchBookByNumPages();
-       	}
+    	
+    	boolean doWhile = true;
+    	
+    	do {
+	    	printSearchMenu();
+	    	if( choice.equals( "1" ) ) 
+	    		library.searchBookByName();
+	    	
+	    	else if( choice.equals( "2" ) ) 
+	    		library.searchBookByAuthor();
+	    	
+	    	else if( choice.equals( "3" ) ) 
+	    		library.searchBookByGenre();
+	    	
+	       	else if( choice.equals( "4" ) ) 
+	       		library.searchBookByNumPages();
+	       	
+	       	else if( choice.equals( "5" ) )
+	       		doWhile = false; 
+	    	
+    	} while( doWhile );
     }
     
     public void addNewBookToLibrary() {
@@ -108,24 +117,24 @@ public class LibraryManager {
     	
         do {
             printStartMenu();
-            if( choice.equals( "1" ) ) {
+            if( choice.equals( "1" ) ) 
             	displayBooksInLibrary();
-            }
-            else if( choice.equals( "2" )) {
+
+            else if( choice.equals( "2" )) 
             	searchBookInLibrary();
-            }
-            else if( choice.equals( "3" )) {
+
+            else if( choice.equals( "3" )) 
             	addNewBookToLibrary();
-            }
-            else if( choice.equals( "4" )) {
+
+            else if( choice.equals( "4" )) 
             	deleteBookFromLibrary();
-            }
-            else if( choice.equals( "5" ) ) {
+
+            else if( choice.equals( "5" ) ) 
             	eraseAllBooksInLibrary();
-            }
-            else if( choice.equals( "6" )) {
+
+            else if( choice.equals( "6" )) 
             	exitLibraryManager();
-            }
+            
         } while ( true );
     }
     
