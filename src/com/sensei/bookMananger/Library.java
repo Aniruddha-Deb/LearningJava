@@ -61,4 +61,25 @@ public class Library {
 		}
 		books.remove( index );
 	}
+
+	public void searchBookByName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void searchBookByAuthor() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void searchBookByGenre() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void searchBookByNumPages() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

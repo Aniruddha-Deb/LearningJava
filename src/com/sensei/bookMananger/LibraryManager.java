@@ -58,6 +58,18 @@ public class LibraryManager {
     
     public void searchBookInLibrary() {
     	printSearchMenu();
+    	if( choice.equals( "1" ) ) {
+    		library.searchBookByName();
+    	}
+    	else if( choice.equals( "2" ) ) {
+    		library.searchBookByAuthor();
+    	}
+    	else if( choice.equals( "3" ) ) {
+    		library.searchBookByGenre();
+    	}
+       	else if( choice.equals( "4" ) ) {
+       		library.searchBookByNumPages();
+       	}
     }
     
     public void addNewBookToLibrary() {
