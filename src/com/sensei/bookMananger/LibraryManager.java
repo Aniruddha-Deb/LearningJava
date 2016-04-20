@@ -41,8 +41,8 @@ public class LibraryManager {
         choice = scanner.getString( "Wating on choice:> " );
     }
     
-    public void printSearchMenu() {
-    	System.out.println( "How would you like to search?" );
+    public void printGenericMenu( String message ) {
+    	System.out.println( message );
     	System.out.println( "    1) By Name" );
     	System.out.println( "    2) By Author" );
     	System.out.println( "    3) By Genre" );
@@ -60,23 +60,35 @@ public class LibraryManager {
     public void searchBookInLibrary() {
     	
     	boolean doWhile = true;
+    	String input;
+    	int in;
     	
     	do {
-	    	printSearchMenu();
-	    	if( choice.equals( "1" ) ) 
-	    		library.searchBookByName();
+	    	printGenericMenu( "How would you like to search for books? ");
+	    	if( choice.equals( "1" ) ) {
+	    		input = scanner.getString( "Enter the name of the book" );
+	    		library.searchBookByName( input, false );
+	    	}
 	    	
-	    	else if( choice.equals( "2" ) ) 
-	    		library.searchBookByAuthor();
+	    	else if( choice.equals( "2" ) ){ 
+	    		input = scanner.getString( "Enter the name of the Author" );
+	    		library.searchBookByAuthor( input, false );
+	    	}
 	    	
-	    	else if( choice.equals( "3" ) ) 
-	    		library.searchBookByGenre();
+	    	else if( choice.equals( "3" ) ){ 
+	    		input = scanner.getString( "Enter the Genre to which the book belongs" );
+	    		library.searchBookByGenre( input, false );
+	    	}
 	    	
-	       	else if( choice.equals( "4" ) ) 
-	       		library.searchBookByNumPages();
+	       	else if( choice.equals( "4" ) ){ 
+	    		in = scanner.getInt( "Enter the number of pages" );
+	       		library.searchBookByNumPages( in, false );
+	       	}
 	       	
-	       	else if( choice.equals( "5" ) )
+	       	else if( choice.equals( "5" ) ){
 	       		doWhile = false; 
+	       		System.out.println( "" );
+	       	}
 	    	
     	} while( doWhile );
     }
@@ -92,9 +104,39 @@ public class LibraryManager {
     }
     
     private void deleteBookFromLibrary() {
-    	int UID;
-    	UID = scanner.getInt( "Enter the UID of the book you want to delete" ) ;
-    	library.deleteBook( UID );
+    	boolean doWhile = true;
+    	String input;
+    	int in;
+    	
+    	do {
+	    	printGenericMenu( "How would you like to delete books? ");
+	    	if( choice.equals( "1" ) ) {
+	    		input = scanner.getString( "Enter the name of the book" );
+	    		library.searchBookByName( input, true );
+	    	}
+	    	
+	    	else if( choice.equals( "2" ) ){ 
+	    		input = scanner.getString( "Enter the name of the Author" );
+	    		library.searchBookByAuthor( input, true );
+	    	}
+	    	
+	    	else if( choice.equals( "3" ) ){ 
+	    		input = scanner.getString( "Enter the Genre to which the book belongs" );
+	    		library.searchBookByGenre( input, true );
+	    	}
+	    	
+	       	else if( choice.equals( "4" ) ){ 
+	    		in = scanner.getInt( "Enter the number of pages" );
+	       		library.searchBookByNumPages( in, true );
+	       	}
+	       	
+	       	else if( choice.equals( "5" ) ){
+	       		doWhile = false; 
+	       		System.out.println( "" );
+	       	}
+	    	
+    	} while( doWhile );
+    	
     	library.save();
     }
     

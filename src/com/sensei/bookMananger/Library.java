@@ -62,31 +62,67 @@ public class Library {
 		books.remove( index );
 	}
 
-	public void searchBookByName() {
-		String name = null;
-		ConsoleReader reader = new ConsoleReader();
+	public void searchBookByName( String name , boolean delete ) {
 		Book buffer = null;
 		
-		name = reader.getString( "Enter the name of the book" );
 		for( int i=0; i<books.size(); i++ ) {
 			if( books.get(i).getBookName().matches( name ) ) {
-				buffer = books.get(i);
-				System.out.println( buffer );
+				if( delete ) {
+					books.remove( i );
+				}
+				else {
+					buffer = books.get(i);
+					System.out.println( buffer );
+				}
 			}
 		}
-		
 	}
 
-	public void searchBookByAuthor() {
+	public void searchBookByAuthor( String author, boolean delete ) {
+		Book buffer = null;
 		
+		for( int i=0; i<books.size(); i++ ) {
+			if( books.get(i).getAuthor().matches( author ) ) {
+				if( delete ) {
+					books.remove( i );
+				}
+				else {
+					buffer = books.get(i);
+					System.out.println( buffer );
+				}
+			}
+		}
 	}
 
-	public void searchBookByGenre() {
+	public void searchBookByGenre( String genre, boolean delete ) {
+		Book buffer = null;
 		
+		for( int i=0; i<books.size(); i++ ) {
+			if( books.get(i).getGenre().matches( genre ) ) {
+				if( delete ) {
+					books.remove( i );
+				}
+				else {
+					buffer = books.get(i);
+					System.out.println( buffer );
+				}
+			}
+		}
 	}
 
-	public void searchBookByNumPages() {
+	public void searchBookByNumPages( int pages , boolean delete ) {
+		Book buffer = null;
 		
+		for( int i=0; i<books.size(); i++ ) {
+			if( books.get(i).getPages() == pages ) {
+				if( delete ) {
+					books.remove( i );
+				}
+				else {
+					buffer = books.get(i);
+					System.out.println( buffer );
+				}
+			}
+		}
 	}
-	
 }
