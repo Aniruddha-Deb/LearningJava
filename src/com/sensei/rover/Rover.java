@@ -1,11 +1,13 @@
 package com.sensei.rover;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Rover {
 	
 	static String choice = null;
 	static Scanner scanner = new Scanner( System.in );
+	static int[][] depths = new int[5][8];
 
 	public static void printStartMenu() {
 		System.out.println( "            ROVER INDEV" );
@@ -19,6 +21,16 @@ public class Rover {
 		choice = scanner.next();
 	}
 	
+	public static void generateDepths() {
+		Random rand = new Random();
+		
+		for( int i=0; i<5; i++ ) {
+			for( int j=0; j<8; j++ ) {
+				depths[i][j] = rand.nextInt( ( 100 - 10 ) + 1 ) + 10;
+			}
+		}
+	}
+	
 	public static void drawBoard() {
 		
 		System.out.println( "" );
@@ -26,7 +38,7 @@ public class Rover {
 		
 		for( int i=0; i<5; i++ ) {
 			for( int j=0; j<8; j++ ) {
-				System.out.print( "\u2022" + "        " );
+				System.out.print( "\u2022" + depths[i][j] + "      " );
 			}
 			System.out.println( "" );
 			System.out.println( "" );
@@ -35,6 +47,7 @@ public class Rover {
 	}
 	
 	public static void playGame() {
+		generateDepths();
 		drawBoard();
 	}
 	
