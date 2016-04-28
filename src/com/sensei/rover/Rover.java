@@ -39,8 +39,10 @@ public class Rover {
 		while( true ) {
 			System.out.print( "Next location X coordinate:> " );
 			xCoord = scanner.nextInt();
-			if( xCoord <= 8 ) 
+			if( xCoord <= 8 && xCoord > 0 ) 
 				break;
+			else if( xCoord <= 0 ) 
+				System.out.println( "Coordinate out of bounds. MinX is 1" );
 			else 
 				System.out.println( "Coordinate out of bounds. MaxX is 8" );
 		}
@@ -48,8 +50,10 @@ public class Rover {
 		while( true ) {
 			System.out.print( "Next location Y coordinate:> " );
 			yCoord = scanner.nextInt();
-			if( yCoord <= 5 ) 
+			if( yCoord <= 5 && yCoord > 0 ) 
 				break;
+			else if( yCoord <=0 ) 
+				System.out.println( "Coordinate out of bounds. MinY is 1" );
 			else 
 				System.out.println( "Coordinate out of bounds. MaxY is 5" );
 		}
@@ -64,7 +68,9 @@ public class Rover {
 			
 			for( int j=0; j<8; j++ ) {
 				if( xCoord == j+1 && yCoord == i+1 ) {
-					System.out.print( "\u2B24" + "      " );
+					System.out.print( "\u2B24" + depths[i][j] + "    " );
+					j++;
+					System.out.print( "\u25EF" + depths[i][j] + "    " );
 				}
 				else{
 					System.out.print( "\u25EF" + "      " );
