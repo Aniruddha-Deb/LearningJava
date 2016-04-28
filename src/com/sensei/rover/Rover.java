@@ -8,6 +8,9 @@ public class Rover {
 	static String choice = null;
 	static Scanner scanner = new Scanner( System.in );
 	static int[][] depths = new int[5][8];
+	int maxX = 8, maxY = 5;
+	static int xCoord = 0;
+	static int yCoord = 0;
 
 	public static void printStartMenu() {
 		System.out.println( "            ROVER INDEV" );
@@ -31,24 +34,59 @@ public class Rover {
 		}
 	}
 	
-	public static void drawBoard() {
+	public static void getRoverCoordinates() {
 		
-		System.out.println( "" );
-		System.out.println( "" );
+		while( true ) {
+			System.out.print( "Next location X coordinate:> " );
+			xCoord = scanner.nextInt();
+			if( xCoord <= 8 ) 
+				break;
+			else 
+				System.out.println( "Coordinate out of bounds. MaxX is 8" );
+		}
 		
-		for( int i=0; i<5; i++ ) {
-			for( int j=0; j<8; j++ ) {
-				System.out.print( "\u2022" + depths[i][j] + "      " );
-			}
-			System.out.println( "" );
-			System.out.println( "" );
-			System.out.println( "" );
+		while( true ) {
+			System.out.print( "Next location Y coordinate:> " );
+			yCoord = scanner.nextInt();
+			if( yCoord <= 5 ) 
+				break;
+			else 
+				System.out.println( "Coordinate out of bounds. MaxY is 5" );
 		}
 	}
 	
+	public static void drawBoard() {
+		
+		for( int i=0; i<5; i++ ) {
+			
+			System.out.println( "" );
+			System.out.println( "" );
+			
+			for( int j=0; j<8; j++ ) {
+				if( xCoord == j+1 && yCoord == i+1 ) {
+					System.out.print( "\u2B24" + "      " );
+				}
+				else{
+					System.out.print( "\u25EF" + "      " );
+				}
+			}
+		}
+		
+		System.out.println( "" );
+	}
+	
 	public static void playGame() {
+		
+		int moves = 0;
+		xCoord = 1;
+		yCoord = 1;
 		generateDepths();
-		drawBoard();
+		
+		do{
+			drawBoard();
+			getRoverCoordinates();
+			moves++;
+		}while( moves < 2 );
 	}
 	
 	public static void displayInstructions() {
