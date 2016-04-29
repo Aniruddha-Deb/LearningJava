@@ -68,9 +68,15 @@ public class Rover {
 			
 			for( int j=0; j<8; j++ ) {
 				if( xCoord == j+1 && yCoord == i+1 ) {
+					if( xCoord != 1 ) {
+						System.out.print( "\u25EF" + depths[i][j] + "    " );
+						j++;
+					}
 					System.out.print( "\u2B24" + depths[i][j] + "    " );
 					j++;
-					System.out.print( "\u25EF" + depths[i][j] + "    " );
+					if( xCoord != 8 ) {
+						System.out.print( "\u25EF" + depths[i][j] + "    " );
+					}
 				}
 				else{
 					System.out.print( "\u25EF" + "      " );
@@ -86,13 +92,15 @@ public class Rover {
 		int moves = 0;
 		xCoord = 1;
 		yCoord = 1;
+		
 		generateDepths();
+		drawBoard();
 		
 		do{
-			drawBoard();
 			getRoverCoordinates();
+			drawBoard();
 			moves++;
-		}while( moves < 2 );
+		}while( moves < 90 );
 	}
 	
 	public static void displayInstructions() {
