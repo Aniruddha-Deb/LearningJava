@@ -8,9 +8,10 @@ public class Rover {
 	static String choice = null;
 	static Scanner scanner = new Scanner( System.in );
 	static int[][] depths = new int[5][8];
+	static int[][] cover = new int[5][8];
 	int maxX = 8, maxY = 5;
-	static int xCoord = 0;
-	static int yCoord = 0;
+	static int roverX = 0;
+	static int roverY = 0;
 
 	public static void printStartMenu() {
 		System.out.println( "            ROVER INDEV" );
@@ -29,7 +30,8 @@ public class Rover {
 		
 		for( int i=0; i<5; i++ ) {
 			for( int j=0; j<8; j++ ) {
-				depths[i][j] = rand.nextInt( ( 100 - 10 ) + 1 ) + 10;
+				depths[i][j] = rand.nextInt( ( 99 - 10 ) + 1 ) + 10;
+				cover[i][j] = 0;
 			}
 		}
 	}
@@ -37,49 +39,82 @@ public class Rover {
 	public static void getRoverCoordinates() {
 		
 		while( true ) {
-			System.out.print( "Next location X coordinate:> " );
-			xCoord = scanner.nextInt();
-			if( xCoord <= 8 && xCoord > 0 ) 
+			System.out.print( "Next location direction:> " );
+			choice = scanner.next();
+			if( choice.matches( "[eEwWnNsS]" ) ) {
+				if( choice.matches( "[eE]" ) ) {
+					if( roverX != 7 )
+						roverX++;
+					else
+						System.out.println( "Maximum X coordinate Reached" );
+				}
+				else if( choice.matches( "[wW]" ) ) {
+					if( roverX != 0 )
+						roverX--;
+					else
+						System.out.println( "Minimum X coordinate Reached" );
+				}
+				else if( choice.matches( "[nN]" ) ) {
+					if( roverY != 0 )
+						roverY--;
+					else
+						System.out.println( "Minimum Y coordinate Reached" );
+				}
+				else if( choice.matches( "[sS]" ) ) {
+					if( roverY != 4 )
+						roverY++;
+					else
+						System.out.println( "Maximum Y coordinate Reached" );
+				}
 				break;
-			else if( xCoord <= 0 ) 
-				System.out.println( "Coordinate out of bounds. MinX is 1" );
+			}
 			else 
-				System.out.println( "Coordinate out of bounds. MaxX is 8" );
+				System.out.println( choice + ": Direction undefined" );
 		}
-		
-		while( true ) {
-			System.out.print( "Next location Y coordinate:> " );
-			yCoord = scanner.nextInt();
-			if( yCoord <= 5 && yCoord > 0 ) 
-				break;
-			else if( yCoord <=0 ) 
-				System.out.println( "Coordinate out of bounds. MinY is 1" );
-			else 
-				System.out.println( "Coordinate out of bounds. MaxY is 5" );
-		}
+		cover[roverY][roverX] = 1;
 	}
 	
-	public static void drawBoard() {
+	public static void drawAndManageBoard() {
 		
-		for( int i=0; i<5; i++ ) {
+		for( int row=0; row<5; row++ ) {
 			
 			System.out.println( "" );
 			System.out.println( "" );
 			
-			for( int j=0; j<8; j++ ) {
-				if( xCoord == j+1 && yCoord == i+1 ) {
-					if( xCoord != 1 ) {
-						System.out.print( "\u25EF" + depths[i][j] + "    " );
-						j++;
-					}
-					System.out.print( "\u2B24" + depths[i][j] + "    " );
-					j++;
-					if( xCoord != 8 ) {
-						System.out.print( "\u25EF" + depths[i][j] + "    " );
+			for( int col=0; col<8; ) {
+				
+				// Rover based row
+				if( roverX == col && roverY == row ) {
+					
+					System.out.print( "\u2B24" + depths[row][col] + "    " );
+					col++;
+					cover[row][col]++;
+					if( roverX != 7 ) {
+						System.out.print( "\u25EF" + depths[row][col] + "    " );
+						col++;
+						cover[row][col]++;
 					}
 				}
-				else{
+				
+				if( roverX == col && roverY == row+1 ) {
+					System.out.print( "\u25EF" + depths[row][col] + "    " );
+					col++;
+					cover[row][col]++;
+				}
+				
+				if( roverX == col && roverY == row-1 ) {
+					System.out.print( "\u25EF" + depths[row][col] + "    " );
+					col++;
+					cover[row][col]++;
+				}
+				
+				if( col < 8 && cover[row][col] != 1 ) {
 					System.out.print( "\u25EF" + "      " );
+					col++;
+				}
+				else if( col < 8 && cover[row][col] == 1 ){
+					System.out.print( "\u25EF" + depths[row][col] + "    " );
+					col++;
 				}
 			}
 		}
@@ -90,15 +125,13 @@ public class Rover {
 	public static void playGame() {
 		
 		int moves = 0;
-		xCoord = 1;
-		yCoord = 1;
 		
 		generateDepths();
-		drawBoard();
+		drawAndManageBoard();
 		
 		do{
 			getRoverCoordinates();
-			drawBoard();
+			drawAndManageBoard();
 			moves++;
 		}while( moves < 90 );
 	}
