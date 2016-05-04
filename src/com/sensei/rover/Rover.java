@@ -80,36 +80,37 @@ public class Rover {
 			
 			for( int col=0; col<8; ) {
 				
-				if( col == roverX-1 && roverY == row ) {
+				if( col == roverX-1 && row == roverY ) {
 					if( roverX != 0 ) {
 						System.out.print( "\u25EF" + depths[row][col] + "    " );
 						col++;
 					}
 				}
 				
-				if( roverX == col && roverY == row ) {
+				if( col == roverX && row == roverY ) {
 					System.out.print( "\u2B24" + depths[row][col] + "    " );
 					col++;
+				}
+				
+				if( col == roverX+1 && row == roverY ) {
 					if( roverX != 7 ) {
 						System.out.print( "\u25EF" + depths[row][col] + "    " );
 						col++;
 					}
 				}
-				
-				if( roverX == col && roverY == row+1 ) {
+					
+				if( col == roverX && row+1 == roverY ) {
 					System.out.print( "\u25EF" + depths[row][col] + "    " );
 					col++;
 				}
 				
-				if( roverX == col && roverY == row-1 ) {
+				if( col == roverX && row-1 == roverY ) {
 					System.out.print( "\u25EF" + depths[row][col] + "    " );
 					col++;
 				}
 				
-				if( col < 8 ) {
-					System.out.print( "\u25EF" + "      " );
-					col++;
-				}
+				System.out.print( "\u25EF" + "      " );
+				col++;
 			}
 		}
 		
