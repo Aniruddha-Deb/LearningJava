@@ -13,7 +13,7 @@ public class Rover {
 	static int roverY = 0;
 
 	public static void printStartMenu() {
-		System.out.println( "            ROVER INDEV" );
+		System.out.println( "           ROVER v1.0 beta" );
 		System.out.println( "======================================");
 		System.out.println( "What would you like to do?");
 		System.out.println( "    P) Play game" );
