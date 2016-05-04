@@ -8,7 +8,6 @@ public class Rover {
 	static String choice = null;
 	static Scanner scanner = new Scanner( System.in );
 	static int[][] depths = new int[5][8];
-	static int[][] cover = new int[5][8];
 	int maxX = 8, maxY = 5;
 	static int roverX = 0;
 	static int roverY = 0;
@@ -31,7 +30,6 @@ public class Rover {
 		for( int i=0; i<5; i++ ) {
 			for( int j=0; j<8; j++ ) {
 				depths[i][j] = rand.nextInt( ( 99 - 10 ) + 1 ) + 10;
-				cover[i][j] = 0;
 			}
 		}
 	}
@@ -71,7 +69,6 @@ public class Rover {
 			else 
 				System.out.println( choice + ": Direction undefined" );
 		}
-		cover[roverY][roverX] = 1;
 	}
 	
 	public static void drawAndManageBoard() {
@@ -83,37 +80,34 @@ public class Rover {
 			
 			for( int col=0; col<8; ) {
 				
-				// Rover based row
+				if( col == roverX-1 && roverY == row ) {
+					if( roverX != 0 ) {
+						System.out.print( "\u25EF" + depths[row][col] + "    " );
+						col++;
+					}
+				}
+				
 				if( roverX == col && roverY == row ) {
-					
 					System.out.print( "\u2B24" + depths[row][col] + "    " );
 					col++;
-					cover[row][col]++;
 					if( roverX != 7 ) {
 						System.out.print( "\u25EF" + depths[row][col] + "    " );
 						col++;
-						cover[row][col]++;
 					}
 				}
 				
 				if( roverX == col && roverY == row+1 ) {
 					System.out.print( "\u25EF" + depths[row][col] + "    " );
 					col++;
-					cover[row][col]++;
 				}
 				
 				if( roverX == col && roverY == row-1 ) {
 					System.out.print( "\u25EF" + depths[row][col] + "    " );
 					col++;
-					cover[row][col]++;
 				}
 				
-				if( col < 8 && cover[row][col] != 1 ) {
+				if( col < 8 ) {
 					System.out.print( "\u25EF" + "      " );
-					col++;
-				}
-				else if( col < 8 && cover[row][col] == 1 ){
-					System.out.print( "\u25EF" + depths[row][col] + "    " );
 					col++;
 				}
 			}
