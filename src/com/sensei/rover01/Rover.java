@@ -21,14 +21,10 @@ public class Rover {
 	}
 
 	public boolean isNearCell( Cell cell ) {
-		// TODO Auto-generated method stub
-		return false;
+		return currentCell.isNearCell( cell );
 	}
 
 	public boolean hasVisitedCell( Cell cell ) {
-		// TODO Auto-generated method stub
-		return false;
+		return cell.hasBeenVisited();
 	}
-
-	
 }

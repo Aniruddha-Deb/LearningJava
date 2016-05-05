@@ -18,6 +18,10 @@ public class Grid {
 		return cells[0][0];
 	}
 	
+	public Cell getCell( int xCoord, int yCoord ) {
+		return cells[yCoord][xCoord];
+	}
+	
 	public Cell[][] getCells() {
 		return cells;
 	}

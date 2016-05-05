@@ -26,14 +26,15 @@ public class UI {
 		choice = scanner.next();
 	}
 
-	private void printCell( boolean isOccupied, boolean printValue ) {
+	private void printCell( boolean isOccupied, boolean printValue, Cell cell ) {
 		
-		String buffer = "      ";
+		String flagBuffer = "    ";
+		String buffer = "     ";
 		
 		if( isOccupied && printValue ) 
-			System.out.print( "\u2B24" + buffer );
+			System.out.print( "\u2B24" + cell.getDepth() + flagBuffer );
 		else if( printValue )
-			System.out.print( "\u25EF" + buffer );
+			System.out.print( "\u25EF" + cell.getDepth() + flagBuffer );
 		else 
 			System.out.print( "\u25EF" + buffer );
 	}
@@ -54,13 +55,13 @@ public class UI {
 				Cell cell = rowCells[ col ];
 				
 				if( rover.isOnCell( cell ) ) {
-					printCell( true, true );
+					printCell( true, true, cell );
 				}
 				else if( rover.isNearCell( cell ) || rover.hasVisitedCell( cell ) ) {
-					printCell( false, true );
+					printCell( false, true, cell );
 				}
 				else{
-					printCell( false, false );
+					printCell( false, false, cell );
 				}
 			}
 		}
