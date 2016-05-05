@@ -14,6 +14,12 @@ public class UI {
 		rover = r;
 	}
 	
+	public String getChoice() {
+		System.out.print( ":> " );
+		choice = scanner.next();
+		return choice;
+	}
+	
 	public void printStartMenu() {
 		System.out.println( "           ROVER v1.0 beta" );
 		System.out.println( "======================================");
@@ -22,8 +28,7 @@ public class UI {
 		System.out.println( "    I) Display instructions" );
 		System.out.println( "    E) Exit" );
 		System.out.println( "======================================");
-		System.out.print  ( "Waiting on choice: ");
-		choice = scanner.next();
+		getChoice();
 	}
 
 	private void printCell( boolean isOccupied, boolean printValue, Cell cell ) {
