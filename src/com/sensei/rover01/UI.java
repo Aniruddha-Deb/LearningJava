@@ -28,7 +28,6 @@ public class UI {
 		System.out.println( "    I) Display instructions" );
 		System.out.println( "    E) Exit" );
 		System.out.println( "======================================");
-		getChoice();
 	}
 
 	private void printCell( boolean isOccupied, boolean printValue, Cell cell ) {
@@ -73,5 +72,6 @@ public class UI {
 		System.out.println( "" );
 	}
 
-
+	public void printInstructions() {
+	}
 }

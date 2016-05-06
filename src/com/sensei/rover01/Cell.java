@@ -17,6 +17,22 @@ public class Cell {
 		return depth;
 	}
 
+	public int getxCoord() {
+		return xCoord;
+	}
+
+	public void setxCoord(int xCoord) {
+		this.xCoord = xCoord;
+	}
+
+	public int getyCoord() {
+		return yCoord;
+	}
+
+	public void setyCoord(int yCoord) {
+		this.yCoord = yCoord;
+	}
+
 	public boolean isNearCell( Cell cell ) {
 		if( yCoord == cell.yCoord ) {
 			if( xCoord == cell.xCoord-1 || xCoord == cell.xCoord+1 ) { 

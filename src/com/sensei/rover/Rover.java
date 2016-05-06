@@ -78,7 +78,6 @@ public class Rover {
 			System.out.println( "" );
 			System.out.println( "" );
 			
-			
 			for( int col=0; col<8; ) {
 				
 				if( col == roverX-1 && row == roverY ) {
