@@ -2,40 +2,81 @@ package com.sensei.rover01;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Grid grid = new Grid( 5, 8 );
-		Rover rover = new Rover( grid.getOrigin() );
-		UI ui = new UI( grid, rover );
-		String choice = null;
+	private Grid grid = new Grid( 5, 8 );
+	private Rover rover = new Rover( grid.getOrigin() );
+	private UI ui = new UI( grid, rover );
+
+	public void runProgram() {
 		
+		String cmd = null;
 		do {
 			ui.printStartMenu();
-			choice = ui.getChoice();
+			cmd = ui.getInput();
 			
-			if( choice.matches( "[Pp]" ) ) {
-				int moves = 0;
-				ui.printGrid();
-				
-				do {
-					choice = ui.getChoice();
-					rover.execute( choice );
-					ui.printGrid();
-					moves++;
-				} while( moves < 10 );
+			if( cmd.equalsIgnoreCase( "p" ) ) {
+				playGame();
 			}
-			
-			else if( choice.matches( "[Ii]" ) ) {
+			else if( cmd.equalsIgnoreCase( "i" ) ) {
 				ui.printInstructions();
 			}
-			
-			else if( choice.matches( "[Ee]" ) ) {
+			else if( cmd.equalsIgnoreCase( "e" ) ) {
 				System.exit( -1 );
 			}
-			
 			else {
-				System.out.println( "Undefined instruction. Please retry." );
+				System.out.println( cmd + ": unrecognized choice" );
 			}
-		} while( true );
+			
+		} while( true ) ;
+	}
+	
+	private void playGame() {
+		
+		boolean keepPlaying = true ;
+		ui.printGrid();
+		
+		do {
+			String cmd = ui.getInput();
+			
+			String[] cmdParams = cmd.split( "\\s+" ) ; 
+			keepPlaying = executeCommand( cmdParams );
+			
+			ui.printGrid();
+		} while( keepPlaying ) ;
+	}
+	
+	private boolean executeCommand( String[] cmdParams ) {
+
+		String cmd = cmdParams[0];
+		
+		if( cmd.equalsIgnoreCase( "move" ) ) {
+			executeMoveCmd( cmdParams ) ;
+			return true ;
+		}
+		else if( cmd.equalsIgnoreCase( "quit" ) ) {
+			return false ;
+		}
+		return false ;
 	}
 
+	private void executeMoveCmd( String[] cmdParams ) {
+		
+		String dir = null ;
+		int    steps = 1 ;
+		
+		if( cmdParams.length > 1 ) {
+			dir = cmdParams[1] ;
+			if( cmdParams.length > 2 ) {
+				steps = Integer.parseInt( cmdParams[2] ) ;
+			}
+			
+			rover.move( dir, steps ) ;
+		}
+		else {
+			System.out.println( "Invalid command" ) ;
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Main().runProgram() ;
+	}
 }

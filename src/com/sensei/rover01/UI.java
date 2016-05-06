@@ -14,9 +14,9 @@ public class UI {
 		rover = r;
 	}
 	
-	public String getChoice() {
+	public String getInput() {
 		System.out.print( ":> " );
-		choice = scanner.next();
+		choice = scanner.nextLine();
 		return choice;
 	}
 	
@@ -28,8 +28,6 @@ public class UI {
 		System.out.println( "    I) Display instructions" );
 		System.out.println( "    E) Exit" );
 		System.out.println( "======================================");
-		System.out.print  ( "Waiting on choice: ");
-		choice = scanner.next();
 	}
 
 	private void printCell( boolean isOccupied, boolean printValue, Cell cell ) {
@@ -63,7 +61,7 @@ public class UI {
 				if( rover.isOnCell( cell ) ) {
 					printCell( true, true, cell );
 				}
-				else if( rover.isNearCell( cell ) || rover.hasVisitedCell( cell ) ) {
+				else if( rover.hasVisitedCell( cell ) ) {
 					printCell( false, true, cell );
 				}
 				else{

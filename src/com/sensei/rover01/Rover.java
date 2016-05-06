@@ -6,6 +6,7 @@ public class Rover {
 	
 	public Rover( Cell origin ) {
 		currentCell = origin;
+		currentCell.setVisited();
 	}
 	
 	public Cell getCurrentCell() {
@@ -28,37 +29,19 @@ public class Rover {
 		return cell.hasBeenVisited();
 	}
 
-	public void execute( String choice ) {
-		int previousX = 0;
-		int previousY = 0;
+	public void move(String dir, int steps) {
 		
-		if( choice.matches( "[eEwWnNsS]" ) ) {
+		Grid grid = currentCell.getGrid() ;
+		Cell nextCell = grid.getRelativeCell( currentCell, dir, steps ) ;
+		
+		if( nextCell != null ) {
+			this.setCurrentCell( nextCell );
+			currentCell.setVisited();
 			
-			if( choice.matches( "[eE]" ) ) {
-				previousX = currentCell.getxCoord();
-				currentCell.setxCoord( previousX + 1 );
-				setCurrentCell( currentCell );
-			}
-			
-			else if( choice.matches( "[wW]" ) ) {
-				previousX = currentCell.getxCoord();
-				currentCell.setxCoord( previousX - 1 );
-				setCurrentCell( currentCell );
-			}
-			
-			else if( choice.matches( "[nN]" ) ) {
-				previousY = currentCell.getyCoord();
-				currentCell.setxCoord( previousY - 1 );
-				setCurrentCell( currentCell );
-			}
-			
-			else if( choice.matches( "[sS]" ) ) {
-				previousY = currentCell.getyCoord();
-				currentCell.setxCoord( previousY + 1 );
-				setCurrentCell( currentCell );
+			Cell[] nCells = grid.getNeighborCells( currentCell ) ;
+			for( Cell neighbor : nCells ) {
+				neighbor.setVisited() ;
 			}
 		}
-		else 
-			System.out.println( choice + ": Direction undefined" );
 	}
 }

@@ -6,11 +6,17 @@ public class Cell {
 	private int xCoord = 0;
 	private int yCoord = 0;
 	private boolean visited = false;
+	private Grid grid = null ;
 	
-	public Cell( int x, int y, int depth ) {
+	public Cell( int y, int x, int depth, Grid grid ) {
 		xCoord = x;
 		yCoord = y;
 		this.depth = depth;
+		this.grid = grid ;
+	}
+	
+	public Grid getGrid() {
+		return this.grid ;
 	}
 	
 	public int getDepth() {
@@ -21,16 +27,8 @@ public class Cell {
 		return xCoord;
 	}
 
-	public void setxCoord(int xCoord) {
-		this.xCoord = xCoord;
-	}
-
 	public int getyCoord() {
 		return yCoord;
-	}
-
-	public void setyCoord(int yCoord) {
-		this.yCoord = yCoord;
 	}
 
 	public boolean isNearCell( Cell cell ) {
