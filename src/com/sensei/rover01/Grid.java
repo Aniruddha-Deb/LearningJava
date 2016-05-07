@@ -24,7 +24,10 @@ public class Grid {
 	}
 	
 	public Cell getCell( int xCoord, int yCoord ) {
-		return cells[yCoord][xCoord];
+		if( xCoord < numCols && xCoord >= 0 && yCoord < numRows && yCoord >= 0 ) {
+			return cells[yCoord][xCoord];
+		}
+		return null;
 	}
 	
 	public Cell[][] getCells() {
@@ -59,8 +62,16 @@ public class Grid {
 		return getCell( nextX, nextY );
 	}
 
-	public Cell[] getNeighborCells(Cell currentCell) {
-		// TODO
-		return null;
+	public Cell[] getNeighborCells( Cell cell ) {
+		Cell[] neighbours = new Cell[4];
+		int xCoord = cell.getxCoord();
+		int yCoord = cell.getyCoord();
+		
+		neighbours[0] = getCell( xCoord-1, yCoord );
+		neighbours[1] = getCell( xCoord, yCoord-1 );
+		neighbours[2] = getCell( xCoord+1, yCoord );
+		neighbours[3] = getCell( xCoord, yCoord+1 );
+		
+		return neighbours;
 	}
 }

@@ -31,20 +31,6 @@ public class Cell {
 		return yCoord;
 	}
 
-	public boolean isNearCell( Cell cell ) {
-		if( yCoord == cell.yCoord ) {
-			if( xCoord == cell.xCoord-1 || xCoord == cell.xCoord+1 ) { 
-				return true;
-			}
-		}
-		else if( xCoord == cell.xCoord ) {
-			if( yCoord == cell.yCoord-1 || yCoord == cell.yCoord+1 ) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	public void setVisited() {
 		visited = true;
 	}

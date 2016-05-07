@@ -5,24 +5,29 @@ public class Rover {
 	private Cell currentCell = null;
 	
 	public Rover( Cell origin ) {
-		currentCell = origin;
-		currentCell.setVisited();
+		setCurrentCell( origin );
 	}
 	
 	public Cell getCurrentCell() {
 		return currentCell;
 	}
 
-	public void setCurrentCell(Cell currentCell) {
-		this.currentCell = currentCell;
+	public void setCurrentCell(Cell nextCell) {
+		if( nextCell != null ) {
+			this.currentCell = nextCell;
+			currentCell.setVisited();
+			
+			Cell[] nCells = currentCell.getGrid().getNeighborCells( currentCell ) ;
+			for( Cell neighbor : nCells ) {
+				if( neighbor != null ) {
+					neighbor.setVisited() ;
+				}
+			}
+		}
 	}
 
 	public boolean isOnCell( Cell cell ) {
 		return cell == currentCell;
-	}
-
-	public boolean isNearCell( Cell cell ) {
-		return currentCell.isNearCell( cell );
 	}
 
 	public boolean hasVisitedCell( Cell cell ) {
@@ -33,15 +38,6 @@ public class Rover {
 		
 		Grid grid = currentCell.getGrid() ;
 		Cell nextCell = grid.getRelativeCell( currentCell, dir, steps ) ;
-		
-		if( nextCell != null ) {
-			this.setCurrentCell( nextCell );
-			currentCell.setVisited();
-			
-			Cell[] nCells = grid.getNeighborCells( currentCell ) ;
-			for( Cell neighbor : nCells ) {
-				neighbor.setVisited() ;
-			}
-		}
+		setCurrentCell( nextCell );
 	}
 }
