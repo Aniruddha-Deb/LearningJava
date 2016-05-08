@@ -3,9 +3,15 @@ package com.sensei.rover01;
 public class Rover {
 
 	private Cell currentCell = null;
+	private EnergyBar energyBar = null; 
 	
-	public Rover( Cell origin ) {
+	public Rover( Cell origin, int energy ) {
 		setCurrentCell( origin );
+		energyBar = new EnergyBar( energy );
+	}
+	
+	public int getEnergyLeft() {
+		return energyBar.getEnergy();
 	}
 	
 	public Cell getCurrentCell() {
@@ -35,9 +41,16 @@ public class Rover {
 	}
 
 	public void move(String dir, int steps) {
-		
-		Grid grid = currentCell.getGrid() ;
-		Cell nextCell = grid.getRelativeCell( currentCell, dir, steps ) ;
-		setCurrentCell( nextCell );
+		int energyRequired = 10*steps;
+		if( getEnergyLeft() >= energyRequired ) {
+			
+			Grid grid = currentCell.getGrid() ;
+			Cell nextCell = grid.getRelativeCell( currentCell, dir, steps ) ;
+			setCurrentCell( nextCell );
+			energyBar.reduceEnergy( 10*steps );
+		}
+		else {
+			System.out.println( "Cannot move, insufficient energy" );
+		}
 	}
 }

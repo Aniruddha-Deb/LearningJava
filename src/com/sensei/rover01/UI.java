@@ -46,13 +46,16 @@ public class UI {
 	public void printGrid() {
 		
 		Cell[][] cells = grid.getCells();
+		int energyLeft = rover.getEnergyLeft();
 		
+		System.out.println( "Energy = " + energyLeft );
 		for( int row=0; row < cells.length; row++ ) {
 			
 			Cell[] rowCells = cells[ row ];
-			
-			System.out.println( "" );
-			System.out.println( "" );
+			if( row != 0 ) {
+				System.out.println( "" );
+				System.out.println( "" );
+			}
 			
 			for( int col=0; col < rowCells.length; col++ ) {
 				

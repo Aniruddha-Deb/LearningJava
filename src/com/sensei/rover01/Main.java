@@ -3,7 +3,7 @@ package com.sensei.rover01;
 public class Main {
 
 	private Grid grid = new Grid( 5, 8 );
-	private Rover rover = new Rover( grid.getOrigin() );
+	private Rover rover = new Rover( grid.getOrigin(), 100 );
 	private UI ui = new UI( grid, rover );
 
 	public void runProgram() {
@@ -39,8 +39,10 @@ public class Main {
 			
 			String[] cmdParams = cmd.split( "\\s+" ) ; 
 			keepPlaying = executeCommand( cmdParams );
-			
 			ui.printGrid();
+			if( rover.getEnergyLeft() <= 0 ) {
+				break;
+			}
 		} while( keepPlaying ) ;
 	}
 	
