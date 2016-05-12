@@ -2,14 +2,19 @@ package com.sensei.rover01;
 
 public class Main {
 
-	private Grid grid = new Grid( 5, 8 );
-	private Rover rover = new Rover( grid.getOrigin(), 100 );
-	private UI ui = new UI( grid, rover );
+	private Grid grid = null;
+	private Rover rover = null;
+	private UI ui = null;
 
 	public void runProgram() {
 		
 		String cmd = null;
 		do {
+			
+			grid = new Grid( 5, 8 );
+			rover = new Rover( grid.getOrigin(), 100 );
+			ui = new UI( grid, rover );
+			
 			ui.printStartMenu();
 			cmd = ui.getInput();
 			
@@ -40,8 +45,15 @@ public class Main {
 			String[] cmdParams = cmd.split( "\\s+" ) ; 
 			keepPlaying = executeCommand( cmdParams );
 			ui.printGrid();
-			if( rover.getEnergyLeft() <= 0 ) {
-				break;
+			if( rover.getEnergyLeft() <= 0 && rover.getCurrentCell().getDepth() > -800 ) {
+				System.out.println( "YOU LOSE!" );
+				System.out.println( "Press p to play again" );
+				keepPlaying = false;
+			}
+			else if( rover.getCurrentCell().getDepth() <= -800 ) {
+				System.out.println( "YOU WIN!" );
+				System.out.println( "Press p to play again" );
+				keepPlaying = false;
 			}
 		} while( keepPlaying ) ;
 	}
@@ -57,7 +69,24 @@ public class Main {
 		else if( cmd.equalsIgnoreCase( "quit" ) ) {
 			return false ;
 		}
+		else if( cmd.equalsIgnoreCase( "drill" ) ) {
+			executeDrillCmd( cmdParams );
+			return true;
+		}
 		return false ;
+	}
+
+	private void executeDrillCmd( String[] cmdParams ) {
+		int depth = 0;
+		
+		if( cmdParams.length == 2 ) {
+			depth = Integer.parseInt( cmdParams[1] );
+			rover.drill( depth );
+		}
+		else {
+			System.out.println( "Invalid command" );
+		}
+		
 	}
 
 	private void executeMoveCmd( String[] cmdParams ) {

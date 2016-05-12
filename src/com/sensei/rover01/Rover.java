@@ -53,4 +53,17 @@ public class Rover {
 			System.out.println( "Cannot move, insufficient energy" );
 		}
 	}
+
+	public void drill( int depth ) {
+		int energyRequired = (int) (0.1*depth);
+		
+		if( getEnergyLeft() >= energyRequired ) {
+			
+			currentCell.setDepth( currentCell.getDepth() - depth );
+			energyBar.reduceEnergy( energyRequired );
+		}
+		else {
+			System.out.println( "Cannot drill to this depth, insufficient energy" );
+		}
+	}
 }

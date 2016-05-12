@@ -29,16 +29,102 @@ public class UI {
 		System.out.println( "    E) Exit" );
 		System.out.println( "======================================");
 	}
+	
+	private void printIndividualCell( boolean occupied, int depth ) {
+		
+		if( depth < 0 && occupied ) {
+			printNegativeCell( true, depth );
+		}
+		else if( depth < 0 ) {
+			printNegativeCell( false, depth );
+		}
+		else if( depth >= 0 && occupied ) {
+			printPositiveCell( true, depth );
+		}
+		else {
+			printPositiveCell( false, depth );
+		}
+	}
+	
+	private void printNegativeCell( boolean occupied, int depth ) {
+		if( occupied ) {
+			printNegativeOccupiedCell( depth );
+		}
+		else {
+			printNegativeUnoccupiedCell( depth );
+		}
+	}
+	
+	private void printPositiveCell( boolean occupied, int depth ) {
+		if( occupied ) {
+			printPositiveOccupiedCell( depth );
+		}
+		else {
+			printPositiveUnoccupiedCell( depth );
+		}
+	}
+	
+	private void printNegativeOccupiedCell( int depth ) {
+		String[] negativeBuffer = { "    ", "   ", "  ", " " };
+		
+		if( depth < 0 && depth > -10 )
+			System.out.print( "\u2B24" + depth + negativeBuffer[0] );
+		else if( depth <= -10 && depth > -100 )
+			System.out.print( "\u2B24" + depth + negativeBuffer[1] );
+		else if( depth <= -100 && depth > -1000 )
+			System.out.print( "\u2B24" + depth + negativeBuffer[2] );
+		else 
+			System.out.print( "\u2B24" + depth + negativeBuffer[3] );
+	}
+	
+	private void printNegativeUnoccupiedCell( int depth ) {
+		String[] negativeBuffer = { "    ", "   ", "  ", " " };
+		
+		if( depth < 0 && depth > -10 )
+			System.out.print( "\u25EF" + depth + negativeBuffer[0] );
+		else if( depth <= -10 && depth > -100 )
+			System.out.print( "\u25EF" + depth + negativeBuffer[1] );
+		else if( depth <= -100 && depth > -1000 )
+			System.out.print( "\u25EF" + depth + negativeBuffer[2] );
+		else 
+			System.out.print( "\u25EF" + depth + negativeBuffer[3] );
+	}
+	
+	private void printPositiveOccupiedCell( int depth ) {
+		String[] flagBuffer = { "     ", "    ", "   ", "  " };
+		
+		if( depth >= 0 && depth < 10 )
+			System.out.print( "\u2B24" + depth + flagBuffer[0] );
+		else if( depth >= 10 && depth < 100 )
+			System.out.print( "\u2B24" + depth + flagBuffer[1] );
+		else if( depth >= 100 && depth < 1000 )
+			System.out.print( "\u2B24" + depth + flagBuffer[2] );
+		else 
+			System.out.print( "\u2B24" + depth + flagBuffer[3] );
+	}
+	
+	private void printPositiveUnoccupiedCell( int depth ) {
+		String[] flagBuffer = { "     ", "    ", "   ", "  " };
+		
+		if( depth >= 0 && depth < 10 )
+			System.out.print( "\u25EF" + depth + flagBuffer[0] );
+		else if( depth >= 10 && depth < 100 )
+			System.out.print( "\u25EF" + depth + flagBuffer[1] );
+		else if( depth >= 100 && depth < 1000 )
+			System.out.print( "\u25EF" + depth + flagBuffer[2] );
+		else 
+			System.out.print( "\u25EF" + depth + flagBuffer[3] );
+	}
+	
 
 	private void printCell( boolean isOccupied, boolean printValue, Cell cell ) {
 		
-		String flagBuffer = "    ";
-		String buffer = "     ";
+		String buffer = "      ";
 		
 		if( isOccupied && printValue ) 
-			System.out.print( "\u2B24" + cell.getDepth() + flagBuffer );
+			printIndividualCell( true, cell.getDepth() );
 		else if( printValue )
-			System.out.print( "\u25EF" + cell.getDepth() + flagBuffer );
+			printIndividualCell( false, cell.getDepth() );
 		else 
 			System.out.print( "\u25EF" + buffer );
 	}
