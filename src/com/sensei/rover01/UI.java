@@ -154,7 +154,7 @@ public class UI {
 					printCell( false, true, cell );
 				}
 				else{
-					printCell( false, false, cell );
+					printCell( false, true, cell );
 				}
 			}
 		}
