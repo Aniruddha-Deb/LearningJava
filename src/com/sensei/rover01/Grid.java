@@ -21,13 +21,7 @@ public class Grid {
 			}
 		}
 		Topographer t = new Topographer( this );
-		t.generateBumps(20);
-		
-		for( int row=0; row < rows; row++ ) {
-			for( int col=0; col < columns; col++ ) {
-				System.out.println( col + "," + row + ", " + cells[col][row].getDepth() ) ;
-			}
-		}
+		t.generateBumps(5);
 	}
 	
 	public Cell getOrigin() {
@@ -79,19 +73,6 @@ public class Grid {
 			return null;
 		}
 		return getCell( nextX, nextY );
-	}
-
-	public Cell[] getNeighborCells( Cell cell ) {
-		Cell[] neighbours = new Cell[4];
-		int xCoord = cell.getXCoord();
-		int yCoord = cell.getYCoord();
-		
-		neighbours[0] = getCell( xCoord-1, yCoord );
-		neighbours[1] = getCell( xCoord, yCoord-1 );
-		neighbours[2] = getCell( xCoord+1, yCoord );
-		neighbours[3] = getCell( xCoord, yCoord+1 );
-		
-		return neighbours;
 	}
 
 	public List<Cell> getNeighborCells(Cell centerCell, int radius, double tolerance ) {

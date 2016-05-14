@@ -1,5 +1,7 @@
 package com.sensei.rover01;
 
+import java.util.List;
+
 public class Rover {
 
 	private Cell currentCell = null;
@@ -23,7 +25,7 @@ public class Rover {
 			this.currentCell = nextCell;
 			currentCell.setVisited();
 			
-			Cell[] nCells = currentCell.getGrid().getNeighborCells( currentCell ) ;
+			List<Cell> nCells = currentCell.getGrid().getNeighborCells( currentCell, 1, 0 ) ;
 			for( Cell neighbor : nCells ) {
 				if( neighbor != null ) {
 					neighbor.setVisited() ;
@@ -41,13 +43,13 @@ public class Rover {
 	}
 
 	public void move(String dir, int steps) {
-		int energyRequired = 10*steps;
+		int energyRequired = (int) (2*steps);
 		if( getEnergyLeft() >= energyRequired ) {
 			
 			Grid grid = currentCell.getGrid() ;
 			Cell nextCell = grid.getRelativeCell( currentCell, dir, steps ) ;
 			setCurrentCell( nextCell );
-			energyBar.reduceEnergy( 10*steps );
+			energyBar.reduceEnergy( energyRequired );
 		}
 		else {
 			System.out.println( "Cannot move, insufficient energy" );

@@ -11,7 +11,7 @@ public class Main {
 		String cmd = null;
 		do {
 			
-			grid = new Grid( 20, 20 );
+			grid = new Grid( 5, 8 );
 			rover = new Rover( grid.getOrigin(), 100 );
 			ui = new UI( grid, rover );
 			
@@ -45,12 +45,12 @@ public class Main {
 			String[] cmdParams = cmd.split( "\\s+" ) ; 
 			keepPlaying = executeCommand( cmdParams );
 			ui.printGrid();
-			if( rover.getEnergyLeft() <= 0 && rover.getCurrentCell().getDepth() > -800 ) {
+			if( rover.getEnergyLeft() <= 0 && rover.getCurrentCell().getDepth() > -1000 ) {
 				System.out.println( "YOU LOSE!" );
 				System.out.println( "Press p to play again" );
 				keepPlaying = false;
 			}
-			else if( rover.getCurrentCell().getDepth() <= -800 ) {
+			else if( rover.getCurrentCell().getDepth() <= -1000 ) {
 				System.out.println( "YOU WIN!" );
 				System.out.println( "Press p to play again" );
 				keepPlaying = false;
@@ -73,7 +73,10 @@ public class Main {
 			executeDrillCmd( cmdParams );
 			return true;
 		}
-		return false ;
+		else {
+			System.out.println( cmd + ": Unrecognized command" );
+		}
+		return true ;
 	}
 
 	private void executeDrillCmd( String[] cmdParams ) {

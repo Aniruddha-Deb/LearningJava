@@ -21,7 +21,7 @@ public class UI {
 	}
 	
 	public void printStartMenu() {
-		System.out.println( "           ROVER v1.0 beta" );
+		System.out.println( "           ROVER v1.0 Final" );
 		System.out.println( "======================================");
 		System.out.println( "What would you like to do?");
 		System.out.println( "    P) Play game" );
@@ -154,7 +154,7 @@ public class UI {
 					printCell( false, true, cell );
 				}
 				else{
-					printCell( false, true, cell );
+					printCell( false, false, cell );
 				}
 			}
 		}
@@ -162,5 +162,24 @@ public class UI {
 	}
 
 	public void printInstructions() {
+		System.out.println( "May 16, 2028\n"
+							+ "1100 hrs:\n"
+							+ "We were given the job of running scans to see what lurks\n"
+							+ "under the surface of mars. Yesterday night, at 2250, we \n"
+							+ "hit a cavern whose opening is 1000 meters below the sector \n"
+							+ "we are based on. Earth says that there is a high chance of \n"
+							+ "finding groundwater in this cave and have urged us to drill \n"
+							+ "to it now. We are leaving now, with high hopes to find mankind \n"
+							+ "another place to settle in. \n"
+							+ "\n"
+							+ "Commands:\n"
+							+ "  Move <direction> <steps>\n"
+							+ "    Direction can be E, W, N or S\n"
+							+ "  Drill <depth>\n"
+							+ "    Depth to be given in meters\n"
+							+ "\n"
+							+ "Instructions:\n"
+							+ "  Drill wisely and get to 800 meters before the energy runs out!\n"
+							+ "" );
 	}
 }
