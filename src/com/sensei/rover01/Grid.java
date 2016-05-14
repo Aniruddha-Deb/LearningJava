@@ -3,7 +3,6 @@ package com.sensei.rover01;
 public class Grid {
 	
 	private Cell[][] cells = null;
-	private Data bumpMap = null;
 	private int numRows = 0 ;
 	private int numCols = 0 ;
 	
@@ -12,12 +11,10 @@ public class Grid {
 		numRows = rows ;
 		numCols = columns ;
 		cells = new Cell[ rows ][ columns ];
-		bumpMap = new Data( rows, columns );
-		bumpMap.generateBumpMap();
 		
 		for( int row=0; row < rows; row++ ) {
 			for( int col=0; col < columns; col++ ) {
-				cells[row][col] = new Cell( row, col, bumpMap.getDepth( col, row ), this );
+				cells[row][col] = new Cell( row, col, row+col, this );
 			}
 		}
 	}
