@@ -27,11 +27,11 @@ public class Cell {
 		this.depth = depth;
 	}
 
-	public int getxCoord() {
+	public int getXCoord() {
 		return xCoord;
 	}
 
-	public int getyCoord() {
+	public int getYCoord() {
 		return yCoord;
 	}
 
@@ -41,6 +41,11 @@ public class Cell {
 
 	public boolean hasBeenVisited() {
 		return visited;
+	}
+
+	public double computeDistanceFrom(Cell centerCell) {
+		return Math.sqrt( Math.pow( centerCell.xCoord - xCoord, 2) + 
+				          Math.pow( centerCell.yCoord - yCoord, 2) ) ;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.sensei.rover01;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Grid {
 	
 	private Cell[][] cells = null;
@@ -14,7 +17,15 @@ public class Grid {
 		
 		for( int row=0; row < rows; row++ ) {
 			for( int col=0; col < columns; col++ ) {
-				cells[row][col] = new Cell( row, col, row+col, this );
+				cells[row][col] = new Cell( row, col, 0, this );
+			}
+		}
+		Topographer t = new Topographer( this );
+		t.generateBumps(20);
+		
+		for( int row=0; row < rows; row++ ) {
+			for( int col=0; col < columns; col++ ) {
+				System.out.println( col + "," + row + ", " + cells[col][row].getDepth() ) ;
 			}
 		}
 	}
@@ -30,13 +41,21 @@ public class Grid {
 		return null;
 	}
 	
+	public int getNumRows() {
+		return numRows;
+	}
+	
+	public int getNumCols() {
+		return numCols;
+	}
+	
 	public Cell[][] getCells() {
 		return cells;
 	}
 
 	public Cell getRelativeCell(Cell currentCell, String dir, int steps) {
-		int nextX = currentCell.getxCoord();
-		int nextY = currentCell.getyCoord();
+		int nextX = currentCell.getXCoord();
+		int nextY = currentCell.getYCoord();
 		
 		if( dir.equalsIgnoreCase( "e" ) ) {
 			nextX += steps;
@@ -64,8 +83,8 @@ public class Grid {
 
 	public Cell[] getNeighborCells( Cell cell ) {
 		Cell[] neighbours = new Cell[4];
-		int xCoord = cell.getxCoord();
-		int yCoord = cell.getyCoord();
+		int xCoord = cell.getXCoord();
+		int yCoord = cell.getYCoord();
 		
 		neighbours[0] = getCell( xCoord-1, yCoord );
 		neighbours[1] = getCell( xCoord, yCoord-1 );
@@ -73,5 +92,31 @@ public class Grid {
 		neighbours[3] = getCell( xCoord, yCoord+1 );
 		
 		return neighbours;
+	}
+
+	public List<Cell> getNeighborCells(Cell centerCell, int radius, double tolerance ) {
+		List<Cell> cells = new ArrayList<>() ;
+		
+		int tlx = centerCell.getXCoord() - radius ;
+		int tly = centerCell.getYCoord() - radius ;
+		int brx = centerCell.getXCoord() + radius ;
+		int bry = centerCell.getYCoord() + radius ;
+		
+		for( int x = tlx; x <= brx; x++ ) {
+			for( int y = tly; y <= bry; y++ ) {
+				if( withinGridBound( x, y ) ) {
+					Cell currentCell = getCell( x, y ) ;
+					double distance = currentCell.computeDistanceFrom( centerCell ) ;
+					if( distance <= radius + tolerance ) {
+						cells.add( getCell( x, y ) ) ;
+					}
+				}
+			}
+		}
+		return cells ;
+	}
+	
+	private boolean withinGridBound( int x, int y ) {
+		return ( x >= 0 && x < numCols ) && ( y >= 0 && y < numRows ) ;
 	}
 }

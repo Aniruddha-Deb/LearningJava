@@ -11,7 +11,7 @@ public class Main {
 		String cmd = null;
 		do {
 			
-			grid = new Grid( 5, 8 );
+			grid = new Grid( 20, 20 );
 			rover = new Rover( grid.getOrigin(), 100 );
 			ui = new UI( grid, rover );
 			
