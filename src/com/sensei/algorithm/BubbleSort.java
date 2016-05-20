@@ -2,7 +2,7 @@ package com.sensei.algorithm;
 
 public class BubbleSort {
 	
-	private int name[] = { 9, 3, 1, 5, 7, 2, 6 };
+	private int name[] = { 2, 1, 10, 11, 3, 0 };
 	
 	public void sortArray() {
 		
