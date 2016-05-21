@@ -21,7 +21,7 @@ public class Grid {
 			}
 		}
 		Topographer t = new Topographer( this );
-		t.generateBumps(5);
+		t.generateBumps();
 	}
 	
 	public Cell getOrigin() {

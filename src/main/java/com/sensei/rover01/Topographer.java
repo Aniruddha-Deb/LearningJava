@@ -5,16 +5,20 @@ import java.util.Random;
 
 public class Topographer {
 	
-	private static final int BUMP_MAX_HEIGHT = 50;
-	private static final int BUMP_MAX_DEPTH = -50;
 	private Grid grid = null;
 	private Random rand = new Random();
+	
+	private int minBumpRadius = 10 ;
+	private int maxBumpRadius = 20 ;
+	private int maxBumpDepth  = -50 ;
+	private int maxBumpHeight = 50 ;
+	private int numBumps = 50 ;
 	
 	public Topographer( Grid grid ) {
 		this.grid = grid;
 	}
 	
-	public void generateBumps( int numBumps ) {
+	public void generateBumps() {
 		for( int i=0; i<numBumps; i++ ) {
 			createAndSuperimposeBump();
 		}
@@ -28,13 +32,13 @@ public class Topographer {
 		
 		centreX = randInt( 0, grid.getNumCols(), false );
 		centreY = randInt( 0, grid.getNumRows(), false );
-		radius = randInt( 4, 8, true );
+		radius = randInt( minBumpRadius, maxBumpRadius, true );
 		
 		if( rand.nextBoolean() ) {
-			height = randInt( BUMP_MAX_DEPTH, BUMP_MAX_DEPTH/3, true );
+			height = randInt( maxBumpDepth, maxBumpDepth/3, true );
 		}
 		else { 
-			height = randInt( BUMP_MAX_HEIGHT/3, BUMP_MAX_HEIGHT, true );
+			height = randInt( maxBumpHeight/3, maxBumpHeight, true );
 		}
 		
 		List<Cell> bumpCells = grid.getNeighborCells(

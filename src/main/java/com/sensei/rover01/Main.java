@@ -11,7 +11,7 @@ public class Main {
 		String cmd = null;
 		do {
 			
-			grid = new Grid( 5, 8 );
+			grid = new Grid( 100, 100 );
 			rover = new Rover( grid.getOrigin(), 100 );
 			ui = new UI( grid, rover );
 			
@@ -38,6 +38,14 @@ public class Main {
 		
 		boolean keepPlaying = true ;
 		ui.printGrid();
+
+		try {
+			TerrainPlotter tp = new TerrainPlotter(grid) ;
+			tp.showPlot();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		do {
 			String cmd = ui.getInput();
