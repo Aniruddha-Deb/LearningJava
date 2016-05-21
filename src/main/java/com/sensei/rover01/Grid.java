@@ -76,7 +76,7 @@ public class Grid {
 	}
 
 	public List<Cell> getNeighborCells(Cell centerCell, int radius, double tolerance ) {
-		List<Cell> cells = new ArrayList<>() ;
+		List<Cell> cells = new ArrayList<Cell>() ;
 		
 		int tlx = centerCell.getXCoord() - radius ;
 		int tly = centerCell.getYCoord() - radius ;

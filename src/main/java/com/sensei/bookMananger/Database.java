@@ -36,7 +36,7 @@ public class Database {
 			}
 		}
 		else {
-			books = new ArrayList<>() ;
+			books = new ArrayList<Book>() ;
 		}
 		library.setBooks( books );
 		library.setNextBookUID( UID );
