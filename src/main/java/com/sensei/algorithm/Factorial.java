@@ -5,18 +5,28 @@ import java.util.Scanner;
 public class Factorial {
 
 	public static void main(String[] args) {
-		int input=0, i=0;
-		int factorial = 1;
-		Scanner scanner = new Scanner( System.in );
+		int input=0;
+		Scanner scanner = new Scanner( System.in ) ;
 		
 		System.out.print( "Enter the number whose factorial is to be found: " );
 		input = scanner.nextInt();
-		scanner.close();
 		
-		for( i=1; i<=input; i++ ) {
+		System.out.println( "The factorial of " + input + " is " + fact( input ) + "." );
+		scanner.close();
+	}
+	
+	private static int getFactorial( int n ) {
+		int factorial = 1;
+		for( int i=1; i<=n; i++ ) {
 			factorial = factorial * i;
 		}
-		
-		System.out.println( "The factorial of " + input + " is " + factorial + "." );
+		return factorial;
+	}
+	
+	private static int fact( int n ) {
+		if( n == 1 ) {
+			return 1 ;
+		}
+		return n * fact( n -1 ) ;
 	}
 }
