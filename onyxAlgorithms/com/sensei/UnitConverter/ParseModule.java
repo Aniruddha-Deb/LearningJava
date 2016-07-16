@@ -14,7 +14,7 @@ public class ParseModule {
 	
 	public ArrayList<Token> process( String str ) {
 		ArrayList<Token> tokens = lexer.lex( str );
-		//tokens = parser.parse( tokens );
+		tokens = parser.parse( tokens );
 		
 		return tokens;
 	}

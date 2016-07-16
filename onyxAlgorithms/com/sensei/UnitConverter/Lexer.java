@@ -14,12 +14,10 @@ public class Lexer {
 		
 		for( String string : buffer ) {
 			if( string.matches("\\d+") ) {
-				System.out.println( string );
 				value = string;
 			}
 			else {
 				unit.addSubUnit( getUnit( string ), getDimension( string ) );
-				System.out.println( string );
 			}
 		}
 		
@@ -33,7 +31,6 @@ public class Lexer {
 		StringBuilder dimString = new StringBuilder();
 		
 		for( int i=0; i<string.length(); i++ ) {
-			System.out.println( string.charAt(i) );
 			if( !Character.isLetter( string.charAt(i) ) ) {
 				dimString.append( string.charAt(i) );
 			}
@@ -43,7 +40,7 @@ public class Lexer {
 			dimension = Integer.parseInt( dimString.toString() );
 		}
 		catch( Exception e ) {
-			dimension = 0;
+			dimension = 1;
 		}
 		
 		return dimension;
