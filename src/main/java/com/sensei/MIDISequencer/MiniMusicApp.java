@@ -1,42 +1,106 @@
 package com.sensei.MIDISequencer;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.io.BufferedReader;
+
 import javax.sound.midi.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class MiniMusicApp {
 
+public class MiniMusicApp implements ControllerEventListener{
+
+	private static JFrame frame = new JFrame( "MiniMusicApp" );
+	private static DrawPanel panel;
+	
+	private BufferedReader reader = null ;
+	
 	public static void main(String[] args) {
 		new MiniMusicApp().play();
 	}
 	
-	public void play() {
-		try{ 
-			Sequencer player = MidiSystem.getSequencer();
-			player.open();
+	private void setUpUI() {
+		panel = new DrawPanel();
+		frame.setSize( 400, 400 );
+		frame.setContentPane( panel );
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.setVisible( true );
+	}
+	
+	private void play() {
+		setUpUI();
+		
+		try{
+			Sequencer sequencer = MidiSystem.getSequencer();
+			sequencer.open();
 			
-			Sequence seq = new Sequence( Sequence.PPQ, 4);
+			int[] eventsIWant = {127};
+			sequencer.addControllerEventListener( this , eventsIWant );
 			
-			Track track = seq.createTrack();
+			Sequence sequence = new Sequence( Sequence.PPQ, 4 );
+			Track track = sequence.createTrack();
 			
-			ShortMessage first = new ShortMessage();
-			first.setMessage( 192, 1, 102, 0 );
-			MidiEvent changeInstrument  = new MidiEvent( first , 1);
-			track.add( changeInstrument );
+			for( int i=5; i<61; i+=4 ) {
+				track.add( makeEvent(144, 1, i, 100, i) );
+				track.add( makeEvent(176, 1, 127, 0, i) ); // detector event
+				track.add( makeEvent(128, 1, i, 100, i+2) );
+			}
 			
-			ShortMessage a = new ShortMessage();
-			a.setMessage( 144, 1, 35, 100 );
-			MidiEvent noteOn = new MidiEvent( a, 1 );
-			track.add( noteOn );
-			
-			ShortMessage b = new ShortMessage();
-			b.setMessage( 128, 1, 44, 100 );
-			MidiEvent noteOff = new MidiEvent(b, 16);
-			track.add( noteOff );
-			
-			player.setSequence( seq );
-			player.start();
+			sequencer.setSequence( sequence );
+			sequencer.setTempoInBPM( 220 );
+			sequencer.start();
 		}
 		catch( Exception ex ) {
 			ex.printStackTrace();
+		}
+	}
+	
+	private MidiEvent makeEvent( int comd, int chan, int one, int two, int tick ) {
+		MidiEvent event = null;
+		
+		try{
+			ShortMessage a = new ShortMessage();
+			a.setMessage( comd, chan, one, two );
+			event = new MidiEvent( a, tick );
+		}
+		catch( Exception e ) {}
+		
+		return event;
+	}
+
+	public void controlChange(ShortMessage event) {
+		panel.controlChange(event);
+	}
+	
+	class DrawPanel extends JPanel implements ControllerEventListener {
+		boolean msg = false;
+		
+		public void controlChange(ShortMessage event) {
+			msg = true;
+			repaint();
+		}
+
+		@Override
+		public void paintComponent( Graphics g ) {
+			if( msg ) {
+				Graphics2D g2d = (Graphics2D) g;
+				
+				int r = (int) (Math.random()*255);
+				int gr = (int) (Math.random()*255);
+				int b = (int) (Math.random()*255);
+				
+				g2d.setColor( new Color( r, gr, b ) );
+				int ht = (int) ( (Math.random()*120) + 10 );
+				int width = (int) ( (Math.random()*120) + 10 );
+				
+				int x = (int) ((Math.random() * 40) + 10);
+				int y = (int) ((Math.random() * 40) + 10);
+
+				g.fillRect( x, y, width, ht );
+				msg = false;
+			}
 		}
 	}
 
