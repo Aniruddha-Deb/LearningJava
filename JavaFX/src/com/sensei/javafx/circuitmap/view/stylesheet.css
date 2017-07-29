@@ -3,6 +3,18 @@
     -fx-background-radius: 0;
 }
 
+.hbox {
+    -fx-background-color: #FFFFFF;
+}
+
+.menu-bar {
+    -fx-background-color: #eaeaea;
+}
+
+.gridPane {
+    -fx-background-color: rgb(221, 245, 255);    
+}
+
 .toolbarButton:hover {
     -fx-background-color: #e8e8e8;
 } 
