@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -41,12 +42,27 @@
             </MenuBar>
             <HBox prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button id="newButton" mnemonicParsing="false" styleClass="toolbarButton" />
-                  <Button id="openButton" mnemonicParsing="false" styleClass="toolbarButton" />
-                  <Button id="saveButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Button id="newButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="New file" />
+                     </tooltip></Button>
+                  <Button id="openButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="Open file" />
+                     </tooltip></Button>
+                  <Button id="saveButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="Save file" />
+                     </tooltip></Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button id="undoButton" mnemonicParsing="false" styleClass="toolbarButton" />
-                  <Button id="redoButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Button id="undoButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="Undo" />
+                     </tooltip></Button>
+                  <Button id="redoButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="Redo" />
+                     </tooltip></Button>
                </children></HBox>
             <SplitPane dividerPositions="0.2" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <items>
@@ -82,7 +98,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="1000.0">
                      <children>
-                        <Canvas fx:id="canvas" height="647.0" layoutX="241.0" layoutY="177.0" onMouseClicked="#onCanvasMouseClick" onMouseDragged="#onCanvasMouseClick" onMousePressed="#onCanvasMouseClick" width="1016.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Canvas fx:id="canvas" height="1000.0" layoutX="241.0" layoutY="177.0" onMouseClicked="#onCanvasMouseClick" onMouseDragged="#onCanvasMouseClick" onMousePressed="#onCanvasMouseClick" width="1500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
               </items>

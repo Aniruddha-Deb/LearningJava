@@ -4,7 +4,7 @@
 }
 
 .toolbarButton:hover {
-    -fx-background-color: #e8e8e8;    
+    -fx-background-color: #e8e8e8;
 } 
 
 .toolbarButton:pressed {
