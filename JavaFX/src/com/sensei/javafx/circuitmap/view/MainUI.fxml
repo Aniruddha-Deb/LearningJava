@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -37,7 +39,15 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <HBox prefHeight="40.0" prefWidth="200.0" />
+            <HBox prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button id="newButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Button id="openButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Button id="saveButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button id="undoButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Button id="redoButton" mnemonicParsing="false" styleClass="toolbarButton" />
+               </children></HBox>
             <SplitPane dividerPositions="0.2" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="24.0">

@@ -1,0 +1,32 @@
+.toolbarButton {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+}
+
+.toolbarButton:hover {
+    -fx-background-color: #e8e8e8;    
+} 
+
+.toolbarButton:pressed {
+    -fx-background-color: #c5c5c5;    
+}
+ 
+#newButton {
+    -fx-graphic: url('res/icons/file.png');
+} 
+
+#openButton {
+    -fx-graphic: url('res/icons/folder-open.png');
+} 
+
+#saveButton {
+    -fx-graphic: url('res/icons/content-save.png');
+} 
+
+#undoButton {
+    -fx-graphic: url('res/icons/undo.png');
+} 
+
+#redoButton {
+    -fx-graphic: url('res/icons/redo.png');
+} 
