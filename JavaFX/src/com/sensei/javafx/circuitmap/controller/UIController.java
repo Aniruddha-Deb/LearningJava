@@ -16,8 +16,8 @@ public class UIController {
 	
 	private int currX = 0;
 	private int currY = 0;
-	private int xStep = 20;
-	private int yStep = 20;
+	private int xStep = 10;
+	private int yStep = 10;
 	
 	private Stage mainStage = null;
 	private ComponentRenderer renderer = null;
@@ -43,17 +43,17 @@ public class UIController {
 		int prevX = currX;
 		int prevY = currY;
 		
-		if( e.getX()-5 > currX+xStep ) {
+		if( e.getX() > currX+(xStep/2) ) {
 			currX = currX + xStep;
 		}
-		else if( e.getX()+5 < currX - xStep ) {
+		else if( e.getX() < currX-(xStep/2) ) {
 			currX = currX - xStep;
 		}
 		
-		if( e.getY()-5 > currY+yStep ) {
+		if( e.getY() > currY+(yStep/2) ) {
 			currY = currY + yStep;
 		}
-		else if( e.getY()+5 < currX - xStep ) {
+		else if( e.getY() < currY-(yStep/2) ) {
 			currY = currY - yStep;
 		}		
 		
