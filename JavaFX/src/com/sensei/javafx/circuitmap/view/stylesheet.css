@@ -3,6 +3,10 @@
     -fx-background-radius: 0;
 }
 
+.pane {
+    -fx-background-color: #FFFFFF;
+}
+
 .hbox {
     -fx-background-color: #FFFFFF;
 }
