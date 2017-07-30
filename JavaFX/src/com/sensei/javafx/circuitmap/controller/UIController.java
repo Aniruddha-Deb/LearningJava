@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class UIController {
@@ -24,18 +23,22 @@ public class UIController {
 	
 	public UIController( Stage mainStage ) {
 		this.mainStage = mainStage;
-		renderer = new ComponentRenderer();
+	}
+
+	@FXML
+	public void initialize(){
+		renderer = new ComponentRenderer( canvas, overlay );
 	}
 	
 	@FXML
 	public void onCanvasMouseClick( MouseEvent e ) {
-		renderer.renderBattery( canvas, currX, currY  );
+		renderer.drawBattery( currX, currY );
 	}
 		
 	@FXML
 	public void onCanvasMouseEntered( MouseEvent e ) {
 		mainStage.getScene().setCursor( Cursor.NONE );
-		renderer.renderBattery( overlay, currX, currY );
+		renderer.renderBatteryPreview( currX, currY );
 	}
 	
 	@FXML
@@ -57,13 +60,9 @@ public class UIController {
 			currY = currY - yStep;
 		}		
 		
-		if( currY != prevY ) {
-			renderer.clear( overlay );
-			renderer.renderBattery( overlay, currX, currY );
-		}
-		else if( currX != prevX ) {
-			renderer.clear( overlay );
-			renderer.renderBattery( overlay, currX, currY );			
+		if( currY != prevY || currX != prevX ) {
+			renderer.clearOverlay();
+			renderer.renderBatteryPreview( currX, currY );			
 		}
 	}
 	

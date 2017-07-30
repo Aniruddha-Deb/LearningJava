@@ -43,6 +43,31 @@
     -fx-graphic: url('res/icons/undo.png');
 } 
 
+#cellButton {
+    -fx-graphic: url('res/icons/cell.png');
+} 
+
+#resistorButton {
+    -fx-graphic: url('res/icons/resistor.png');
+} 
+
+#capButton {
+    -fx-graphic: url('res/icons/cap.png');
+} 
+
+#keyButton {
+    -fx-graphic: url('res/icons/key.png');
+} 
+
+#voltmeterButton {
+    -fx-graphic: url('res/icons/voltmeter.png');
+} 
+
+#ammeterButton {
+    -fx-graphic: url('res/icons/ammeter.png');
+} 
+
 #redoButton {
     -fx-graphic: url('res/icons/redo.png');
 } 
+
