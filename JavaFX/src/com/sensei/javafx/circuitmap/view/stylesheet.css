@@ -43,6 +43,10 @@
     -fx-graphic: url('res/icons/undo.png');
 } 
 
+#redoButton {
+    -fx-graphic: url('res/icons/redo.png');
+} 
+
 #cellButton {
     -fx-graphic: url('res/icons/cell.png');
 } 
@@ -67,7 +71,10 @@
     -fx-graphic: url('res/icons/ammeter.png');
 } 
 
-#redoButton {
-    -fx-graphic: url('res/icons/redo.png');
-} 
+#wireButton {
+    -fx-graphic: url('res/icons/wire.png');
+}
 
+#eraserButton {
+    -fx-graphic: url('res/icons/eraser.png');
+}
