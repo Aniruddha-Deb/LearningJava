@@ -32,11 +32,11 @@
 } 
 
 #openButton {
-    -fx-graphic: url('res/icons/folder-open.png');
+    -fx-graphic: url('res/icons/open.png');
 } 
 
 #saveButton {
-    -fx-graphic: url('res/icons/content-save.png');
+    -fx-graphic: url('res/icons/save.png');
 } 
 
 #undoButton {

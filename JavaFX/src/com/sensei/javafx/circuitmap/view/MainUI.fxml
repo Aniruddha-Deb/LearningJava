@@ -83,8 +83,14 @@
                         <Tooltip text="Key" />
                      </tooltip></Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button id="wireButton" mnemonicParsing="false" styleClass="toolbarButton" />
-                  <Button id="eraserButton" mnemonicParsing="false" styleClass="toolbarButton" />
+                  <Button id="wireButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="Wire" />
+                     </tooltip></Button>
+                  <Button id="eraserButton" mnemonicParsing="false" styleClass="toolbarButton">
+                     <tooltip>
+                        <Tooltip text="Eraser" />
+                     </tooltip></Button>
                </children></HBox>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="1000.0">
                <children>
