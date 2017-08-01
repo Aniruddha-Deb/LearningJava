@@ -36,58 +36,58 @@
             </MenuBar>
             <HBox prefHeight="24.0" prefWidth="200.0" styleClass="hbox">
                <children>
-                  <Button id="newButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="newButton" mnemonicParsing="false" onAction="#onNewFileButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="New file" />
                      </tooltip></Button>
-                  <Button id="openButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="openButton" mnemonicParsing="false" onAction="#onOpenFileButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Open file" />
                      </tooltip></Button>
-                  <Button id="saveButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="saveButton" mnemonicParsing="false" onAction="#onSaveFileButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Save file" />
                      </tooltip></Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button id="undoButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Undo" />
                      </tooltip></Button>
-                  <Button id="redoButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Redo" />
                      </tooltip></Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button id="cellButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="cellButton" mnemonicParsing="false" onAction="#onCellButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Cell" />
                      </tooltip></Button>
-                  <Button id="resistorButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="resistorButton" mnemonicParsing="false" onAction="#onResistorButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Resistor" />
                      </tooltip></Button>
-                  <Button id="capButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="capButton" mnemonicParsing="false" onAction="#onCapacitorButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Capacitor" />
                      </tooltip></Button>
-                  <Button id="voltmeterButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="voltmeterButton" mnemonicParsing="false" onAction="#onVoltmeterButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Voltmeter" />
                      </tooltip></Button>
-                  <Button id="ammeterButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="ammeterButton" mnemonicParsing="false" onAction="#onAmmeterButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Ammeter" />
                      </tooltip></Button>
-                  <Button id="keyButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="keyButton" mnemonicParsing="false" onAction="#onKeyButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Key" />
                      </tooltip></Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button id="wireButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="wireButton" mnemonicParsing="false" onAction="#onWireButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Wire" />
                      </tooltip></Button>
-                  <Button id="eraserButton" mnemonicParsing="false" styleClass="toolbarButton">
+                  <Button id="eraserButton" mnemonicParsing="false" onAction="#onEraserButtonClick" styleClass="toolbarButton">
                      <tooltip>
                         <Tooltip text="Eraser" />
                      </tooltip></Button>
