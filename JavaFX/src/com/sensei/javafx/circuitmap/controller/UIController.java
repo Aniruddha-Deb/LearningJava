@@ -13,8 +13,7 @@ import javafx.stage.Stage;
 public class UIController {
 	
 	enum Tool {
-		CELL, RESISTOR, CAPACITOR, VOLTMETER, AMMETER, KEY, WIRE, ERASER; 
-		
+		CELL, RESISTOR, CAPACITOR, VOLTMETER, AMMETER, KEY, WIRE, ERASER; 		
 	}
 	
 	@FXML
