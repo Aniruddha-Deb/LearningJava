@@ -49,13 +49,13 @@ public class UIController {
 	
 	@FXML
 	public void onCanvasMouseClick( MouseEvent e ) {
-		renderer.drawComponent( currentTool, currX, currY );
+		renderer.drawComponent( currentTool, currX/2, currY/2 );
 	}
 		
 	@FXML
 	public void onCanvasMouseEntered( MouseEvent e ) {
-		mainStage.getScene().setCursor( Cursor.NONE );
-		renderer.renderComponentPreview( currentTool, currX, currY );
+		mainStage.getScene().setCursor( Cursor.CROSSHAIR );
+		renderer.renderComponentPreview( currentTool, currX/2, currY/2 );
 	}
 	
 	@FXML
@@ -78,8 +78,8 @@ public class UIController {
 		}		
 		
 		if( currY != prevY || currX != prevX ) {
-			renderer.clearRect( prevX, prevY );
-			renderer.renderComponentPreview( currentTool, currX, currY );			
+			renderer.clearRect( prevX/2, prevY/2 );
+			renderer.renderComponentPreview( currentTool, currX/2, currY/2 );			
 		}
 	}
 	

@@ -22,7 +22,9 @@ public class ComponentRenderer {
 		this.overlayCanvas = c.overlay;
 		
 		this.main = mainCanvas.getGraphicsContext2D();
+		main.scale( 2, 2 );
 		this.overlay = overlayCanvas.getGraphicsContext2D();
+		overlay.scale( 2, 2 );
 	}
 
 	public void renderComponentPreview( Tool t, int x, int y ) {
@@ -130,6 +132,6 @@ public class ComponentRenderer {
 	}
 	
 	public void clearRect( int startX, int startY ) {
-		overlay.clearRect( startX-40, startY-40, 160, 80 );		
+		overlay.clearRect( startX-50, startY-50, 100, 100 );		
 	}
 }
