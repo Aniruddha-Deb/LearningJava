@@ -65,6 +65,9 @@ public class ComponentRenderer {
 					renderVoltmeter( g2d, x, y );
 				break;
 
+				case WIRE:
+					renderWire( g2d, x, y );
+				break;
 			}
 		}
 	}
@@ -102,7 +105,7 @@ public class ComponentRenderer {
 		g2d.strokeArc( x+5, y-15, 30, 30, 90, 360, ArcType.CHORD );
 		g2d.setTextAlign( TextAlignment.CENTER );
 		g2d.setFont( new Font( "Helvetica", 20 ) );
-		g2d.strokeText( "V", x+20, y+7.5 );
+		g2d.fillText( "V", x+20, y+7.5 );
 		g2d.strokeLine( x+35, y, x+40, y );
 	}
 	
@@ -111,27 +114,48 @@ public class ComponentRenderer {
 		g2d.strokeArc( x+5, y-15, 30, 30, 90, 360, ArcType.CHORD );
 		g2d.setTextAlign( TextAlignment.CENTER );
 		g2d.setFont( new Font( "Helvetica", 20 ) );
-		g2d.strokeText( "A", x+20, y+7.5 );
+		g2d.fillText( "A", x+20, y+7.5 );
 		g2d.strokeLine( x+35, y, x+40, y );		
 	}
 	
 	private void renderKey( GraphicsContext g2d, int x, int y ) {
-		// TODO play with arc
-//		g2d.strokeLine( x+2.5, y, x+10, y );
-//		g2d.strokeArc( x+10, y-10, 20, 20, 100, 160, ArcType.OPEN );		
-//		g2d.strokeArc( x+15, y-10, 20, 20, -80, 160, ArcType.OPEN );
-//		g2d.fillOval( x+20, y-2.5, 5, 5 );
-//		g2d.strokeLine( x+35, y, x+42.5, y );
+		g2d.strokeLine( x, y, x+10, y );
+		g2d.strokeArc( x+10, y-10, 20, 20, 90, 360, ArcType.CHORD );
+		g2d.clearRect( x+17, y-11, 6, 22 );
+		g2d.fillArc( x+18, y-2, 4, 4, 90, 360, ArcType.CHORD );
+		g2d.strokeLine( x+30, y, x+40, y );		
 	}
 	
+	private int wireStartX = -1;
+	private int wireStartY = -1;
 	
+	public void setWireStartCoordinates( int x, int y ) {
+		this.wireStartX = x;
+		this.wireStartY = y;
+	}
+	
+	private void renderWire( GraphicsContext g2d, int x, int y ) {
+		if( wireStartX != -1 && wireStartY != -1 ) {
+			g2d.strokeLine( wireStartX, wireStartY, x, y );
+		}
+	}
+	
+	public void resetWireStartCoordinates() {
+		this.wireStartX = -1;
+		this.wireStartY = -1;
+	}
 	
 	public void clearOverlay() {
 		overlay.clearRect( 0, 0, overlayCanvas.getWidth(), 
 								overlayCanvas.getHeight() );
 	}
 	
-	public void clearRect( int startX, int startY ) {
-		overlay.clearRect( startX-50, startY-50, 100, 100 );		
+	public void clearComponentPreview( Tool t, int x, int y ) {
+		if( t != Tool.WIRE ) {
+			overlay.clearRect( x-50, y-50, 100, 100 );		
+		}
+		else if( wireStartX != -1 && wireStartY != -1 ) {
+			clearOverlay();
+		}
 	}
 }

@@ -49,7 +49,16 @@ public class UIController {
 	
 	@FXML
 	public void onCanvasMouseClick( MouseEvent e ) {
-		renderer.drawComponent( currentTool, currX/2, currY/2 );
+		if( currentTool == Tool.WIRE ) {
+			renderer.drawComponent( currentTool, currX/2, currY/2 );
+			renderer.setWireStartCoordinates( currX/2, currY/2 );
+		}
+		else if( currentTool == Tool.ERASER ) {
+			// TODO implement editStack.
+		}
+		else {
+			renderer.drawComponent( currentTool, currX/2, currY/2 );
+		}
 	}
 		
 	@FXML
@@ -78,7 +87,7 @@ public class UIController {
 		}		
 		
 		if( currY != prevY || currX != prevX ) {
-			renderer.clearRect( prevX/2, prevY/2 );
+			renderer.clearComponentPreview( currentTool, prevX/2, prevY/2 );
 			renderer.renderComponentPreview( currentTool, currX/2, currY/2 );			
 		}
 	}
@@ -86,6 +95,7 @@ public class UIController {
 	@FXML
 	public void onCanvasMouseExited( MouseEvent e ) {
 		mainStage.getScene().setCursor( Cursor.DEFAULT );
+		renderer.resetWireStartCoordinates();
 		renderer.clearOverlay();
 	}
 	
