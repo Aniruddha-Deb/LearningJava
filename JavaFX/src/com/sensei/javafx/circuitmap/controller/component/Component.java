@@ -1,8 +1,8 @@
-package com.sensei.javafx.circuitmap.controller;
+package com.sensei.javafx.circuitmap.controller.component;
 
-import com.sensei.javafx.circuitmap.controller.UIController.Tool;
+import javax.tools.Tool;
 
-public class Component {
+public abstract class Component {
 	
 	private int startX = 0;
 	private int endX = 0;
@@ -36,5 +36,11 @@ public class Component {
 
 	public Tool getComponentType(){
 		return componentType;
+	}
+	
+	@Override
+	public String toString(){
+		return componentType.toString().toLowerCase() + 
+			   "( " + startX + ", " + endX + ", " + startY + ", " + endY + ")";
 	}
 }

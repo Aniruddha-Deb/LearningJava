@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane onKeyPressed="#onEscapeKeyPressed" prefHeight="720.0" prefWidth="1280.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -95,7 +95,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="1000.0">
                <children>
                   <Canvas fx:id="canvas" height="656.0" layoutX="241.0" layoutY="177.0" onMouseClicked="#onCanvasMouseClick" onMouseEntered="#onCanvasMouseEntered" onMouseExited="#onCanvasMouseExited" onMouseMoved="#onCanvasMouseMoved" styleClass="canvas" width="1021.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Canvas fx:id="overlay" height="656.0" onMouseClicked="#onCanvasMouseClick" onMouseEntered="#onCanvasMouseEntered" onMouseExited="#onCanvasMouseExited" onMouseMoved="#onCanvasMouseMoved" styleClass="canvas" width="1021.0" />
+                  <Canvas fx:id="overlay" height="656.0" onKeyPressed="#onEscapeKeyPressed" onMouseClicked="#onCanvasMouseClick" onMouseEntered="#onCanvasMouseEntered" onMouseExited="#onCanvasMouseExited" onMouseMoved="#onCanvasMouseMoved" styleClass="canvas" width="1021.0" />
                </children>
             </AnchorPane>
          </children>

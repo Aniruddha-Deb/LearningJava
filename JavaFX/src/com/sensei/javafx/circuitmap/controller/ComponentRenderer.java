@@ -17,9 +17,13 @@ public class ComponentRenderer {
 	private GraphicsContext main = null;
 	private GraphicsContext overlay = null;
 	
+	private UIController controller = null;
+	
 	public ComponentRenderer( UIController c ) {
 		this.mainCanvas = c.canvas;
 		this.overlayCanvas = c.overlay;
+		
+		this.controller = c;
 		
 		this.main = mainCanvas.getGraphicsContext2D();
 		main.scale( 2, 2 );
@@ -33,6 +37,7 @@ public class ComponentRenderer {
 	
 	public void drawComponent( Tool t, int x, int y ) {
 		render( main, t, x, y );
+		
 	}
 	
 	private void render( GraphicsContext g2d, Tool t, int x, int y ) {
