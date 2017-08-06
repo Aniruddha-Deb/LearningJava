@@ -32,6 +32,7 @@ public class UIController {
 	
 	@FXML
 	public void onCanvasMouseClick( MouseEvent e ) {
+		renderer.clearCurrentComponentPreview();
 		renderer.drawCurrentComponentAt( new Point2D( e.getX(), e.getY() ) );
 		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
 		selectedComponent.setLocation( new Point2D( e.getX(), e.getY() ) );
@@ -41,6 +42,7 @@ public class UIController {
 	@FXML
 	public void onCanvasMouseEntered( MouseEvent e ) {
 		Point2D currPoint = new Point2D( e.getX(), e.getY() );
+		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
 		selectedComponent.setLocation( currPoint );
 		renderer.setCurrentComponent( selectedComponent );
 		renderer.previewCurrentComponentAt( currPoint );
@@ -85,27 +87,31 @@ public class UIController {
 	@FXML 
 	public void onCellButtonClick( ActionEvent e ) {
 		selectedComponentType = ComponentType.CELL;
-		selectedComponent = ComponentFactory.createComponent( ComponentType.CELL );
 	}
 
 	@FXML 
 	public void onResistorButtonClick( ActionEvent e ) {
+		selectedComponentType = ComponentType.RESISTOR;
 	}
 
 	@FXML 
 	public void onCapacitorButtonClick( ActionEvent e ) {
+		selectedComponentType = ComponentType.CAPACITOR;
 	}
 
 	@FXML 
 	public void onVoltmeterButtonClick( ActionEvent e ) {
+		selectedComponentType = ComponentType.VOLTMETER;
 	}
 
 	@FXML 
 	public void onAmmeterButtonClick( ActionEvent e ) {
+		selectedComponentType = ComponentType.AMMETER;
 	}
 
 	@FXML 
 	public void onKeyButtonClick( ActionEvent e ) {
+		selectedComponentType = ComponentType.KEY;
 	}
 
 	@FXML 
