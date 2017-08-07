@@ -8,9 +8,12 @@ import com.sensei.javafx.circuitmap.core.components.ComponentFactory.ComponentTy
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class UIController {
 	
@@ -23,6 +26,12 @@ public class UIController {
 	private Renderer renderer = null;
 	private Component selectedComponent = null;
 	private ComponentType selectedComponentType = ComponentType.DUMMY;
+	
+	private Stage stage = null;
+	
+	public UIController( Stage stage ) {
+		this.stage = stage;
+	}
 	
 	@FXML
 	public void initialize(){
@@ -41,6 +50,7 @@ public class UIController {
 		
 	@FXML
 	public void onCanvasMouseEntered( MouseEvent e ) {
+		stage.getScene().setCursor( Cursor.NONE );
 		Point2D currPoint = new Point2D( e.getX(), e.getY() );
 		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
 		selectedComponent.setLocation( currPoint );
@@ -55,6 +65,7 @@ public class UIController {
 	
 	@FXML
 	public void onCanvasMouseExited( MouseEvent e ) {
+		stage.getScene().setCursor( Cursor.DEFAULT );
 		renderer.clearCurrentComponentPreview();
 	}
 	

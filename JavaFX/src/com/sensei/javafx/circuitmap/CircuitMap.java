@@ -18,8 +18,8 @@ public class CircuitMap extends Application{
 	
 	@Override
 	public void start( Stage primaryStage ) throws Exception {
-		UIController c = new UIController();
 		
+		UIController c = new UIController( primaryStage );
 		FXMLLoader loader = new FXMLLoader( CircuitMap.class.getResource( VIEW_PATH ) );
 		loader.setController( c );
 		AnchorPane root = loader.load();

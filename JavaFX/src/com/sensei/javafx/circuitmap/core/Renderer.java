@@ -1,17 +1,21 @@
 package com.sensei.javafx.circuitmap.core;
 
 import java.util.ArrayDeque;
+import java.util.function.Consumer;
 
 import com.sensei.javafx.circuitmap.core.components.Component;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 public class Renderer {
 	
 	private ArrayDeque<Component> drawnComponents = null;
 	private ArrayDeque<Component> undoneComponents = null;
 	private Component currentComponent = null;
+	
+	private boolean canDraw = true;
 	
 	private Canvas previewCanvas = null;
 	private Canvas mainCanvas = null;
@@ -29,6 +33,30 @@ public class Renderer {
 	}
 	
 	public void previewCurrentComponentAt( Point2D location ) {
+
+		canDraw = true;
+		drawnComponents.forEach( (c) -> {
+			double x = location.getX();
+			double y = location.getY();
+			
+			double cStartX = c.getStart().getX()-c.getWidth();
+			double cStartY = c.getStart().getY()-c.getHeight();
+			double cEndX = c.getEnd().getX();
+			double cEndY = c.getEnd().getY();
+			
+			if( ( x > cStartX && x < cEndX ) && ( y > cStartY && y < cEndY ) ) {
+				canDraw = false;
+			}
+		});
+		
+		if( !canDraw ) {
+			previewCanvas.getGraphicsContext2D().setStroke( Color.RED );
+			previewCanvas.getGraphicsContext2D().setFill( Color.RED );
+		}
+		else {
+			previewCanvas.getGraphicsContext2D().setStroke( Color.BLACK );
+			previewCanvas.getGraphicsContext2D().setFill( Color.BLACK );			
+		}
 		currentComponent.erase( previewCanvas.getGraphicsContext2D() );
 		currentComponent.setLocation( location );
 		currentComponent.render( previewCanvas.getGraphicsContext2D() );		
@@ -39,10 +67,13 @@ public class Renderer {
 	}
 	
 	public void drawCurrentComponentAt( Point2D location ) {
-		currentComponent.setLocation( location );
-		currentComponent.render( mainCanvas.getGraphicsContext2D() );
-		drawnComponents.push( currentComponent );
-		currentComponent = null;
+
+		if( canDraw ) {
+			currentComponent.setLocation( location );
+			currentComponent.render( mainCanvas.getGraphicsContext2D() );
+			drawnComponents.push( currentComponent );
+			currentComponent = null;
+		}
 	}
 	
 	public void undo() {

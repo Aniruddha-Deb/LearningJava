@@ -29,6 +29,14 @@ public abstract class Component implements Drawable{
 	
 	public abstract void setLocation( Point2D start );
 	
+	public double getHeight() {
+		return end.getY()-start.getY();
+	}
+	
+	public double getWidth() {
+		return end.getX()-start.getX();
+	}
+	
 	protected void setEnd( Point2D end ) {
 		this.end = end;
 	}
@@ -44,8 +52,7 @@ public abstract class Component implements Drawable{
 	public void erase( GraphicsContext g2d ) {
 		double w = end.getX()-start.getX();
 		double h = end.getY()-start.getY();
-		// +2 as buffer
-		g2d.clearRect( start.getX()-2, start.getY()-2, w+4, h+4 );
+		g2d.clearRect( start.getX(), start.getY(), w, h );
 	}
 	
 	@Override
