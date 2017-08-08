@@ -35,8 +35,16 @@ public class UIController {
 	
 	@FXML
 	public void initialize(){
+		bindCanvasProperties();
 		renderer = new Renderer( overlay, canvas );
 		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
+	}
+	
+	private void bindCanvasProperties() {
+		overlay.widthProperty().bind( stage.widthProperty() );
+		overlay.heightProperty().bind( stage.heightProperty() );
+		canvas.widthProperty().bind( stage.widthProperty() );
+		canvas.widthProperty().bind( stage.heightProperty() );
 	}
 	
 	@FXML
