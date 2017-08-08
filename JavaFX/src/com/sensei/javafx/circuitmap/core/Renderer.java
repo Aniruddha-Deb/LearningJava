@@ -1,7 +1,6 @@
 package com.sensei.javafx.circuitmap.core;
 
 import java.util.ArrayDeque;
-import java.util.function.Consumer;
 
 import com.sensei.javafx.circuitmap.core.components.Component;
 
@@ -39,10 +38,10 @@ public class Renderer {
 			double x = location.getX();
 			double y = location.getY();
 			
-			double cStartX = c.getStart().getX()-c.getWidth();
-			double cStartY = c.getStart().getY()-c.getHeight();
-			double cEndX = c.getEnd().getX();
-			double cEndY = c.getEnd().getY();
+			double cStartX = c.getStart().getX()-currentComponent.getWidth()+0.5;
+			double cStartY = c.getStart().getY()-currentComponent.getHeight()+0.5;
+			double cEndX = c.getEnd().getX()-0.5;
+			double cEndY = c.getEnd().getY()-0.5;
 			
 			if( ( x > cStartX && x < cEndX ) && ( y > cStartY && y < cEndY ) ) {
 				canDraw = false;

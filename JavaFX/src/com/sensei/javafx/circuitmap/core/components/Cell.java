@@ -12,7 +12,7 @@ public class Cell extends Component {
 	@Override
 	public void setLocation( Point2D start ) {
 		super.setStart( start );
-		super.setEnd( new Point2D( start.getX()+40, start.getY()+40 ) );
+		super.setEnd( new Point2D( start.getX()+30.5, start.getY()+40.5 ) );
 	}
 	
 	@Override

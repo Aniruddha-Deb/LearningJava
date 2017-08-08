@@ -12,7 +12,7 @@ public class Capacitor extends Component {
 	@Override
 	public void setLocation( Point2D start ) {
 		super.setStart( start );
-		super.setEnd( new Point2D( start.getX()+40, start.getY()+30 ) );
+		super.setEnd( new Point2D( start.getX()+40.5, start.getY()+30.5 ) );
 	}
 	
 	@Override
