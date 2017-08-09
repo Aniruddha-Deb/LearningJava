@@ -5,6 +5,8 @@ import com.sensei.javafx.circuitmap.core.components.Component;
 import com.sensei.javafx.circuitmap.core.components.ComponentFactory;
 import com.sensei.javafx.circuitmap.core.components.ComponentFactory.ComponentType;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -23,21 +25,24 @@ public class UIController {
 	public Canvas overlay;
 	
 	private Renderer renderer = null;
-	private Component selectedComponent = null;
-	private ComponentType selectedComponentType = ComponentType.DUMMY;
+	private ObjectProperty<Component> currentComponent = null;
+	private ComponentType currentComponentType = null;
 	private Point2D gridSnapLocation = null;
 	
 	private Stage stage = null;	
 	
 	public UIController( Stage stage ) {
 		this.stage = stage;
+		currentComponentType = ComponentType.DUMMY;
+		currentComponent = new SimpleObjectProperty<>( 
+				ComponentFactory.createComponent( currentComponentType ) );
 	}
 	
 	@FXML
 	public void initialize(){
 		bindCanvasProperties();
-		renderer = new Renderer( overlay, canvas );
-		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
+		renderer = new Renderer( overlay, canvas );		
+		renderer.currentComponent().bind( currentComponent );
 	}
 	
 	private void bindCanvasProperties() {
@@ -49,27 +54,26 @@ public class UIController {
 	
 	@FXML
 	public void onCanvasMouseClick( MouseEvent e ) {
-		renderer.clearCurrentComponentPreview();
-		renderer.drawCurrentComponentAt( gridSnapLocation );
-		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
-		selectedComponent.setLocation( gridSnapLocation );
-		renderer.setCurrentComponent( selectedComponent );		
+		renderer.drawCurrentComponent();
+		currentComponent.set( ComponentFactory.createComponent( currentComponentType ) );
+		currentComponent.get().setLocation( gridSnapLocation );
 	}
 		
 	@FXML
 	public void onCanvasMouseEntered( MouseEvent e ) {
 		calculateGridSnapLocation( e );
 		stage.getScene().setCursor( Cursor.CROSSHAIR );
-		selectedComponent = ComponentFactory.createComponent( selectedComponentType );
-		selectedComponent.setLocation( gridSnapLocation );
-		renderer.setCurrentComponent( selectedComponent );
-		renderer.previewCurrentComponentAt( gridSnapLocation );
+		currentComponent.set( ComponentFactory.createComponent( currentComponentType ) );
+		currentComponent.get().setLocation( gridSnapLocation );
+		renderer.previewCurrentComponent();
 	}
 	
 	@FXML
 	public void onCanvasMouseMoved( MouseEvent e ) {		
 		calculateGridSnapLocation( e );
-		renderer.previewCurrentComponentAt( gridSnapLocation );
+		renderer.clearComponentPreview();
+		currentComponent.get().setLocation( gridSnapLocation );
+		renderer.previewCurrentComponent();
 	}
 	
 	private void calculateGridSnapLocation( MouseEvent e ) {
@@ -85,7 +89,7 @@ public class UIController {
 	@FXML
 	public void onCanvasMouseExited( MouseEvent e ) {
 		stage.getScene().setCursor( Cursor.DEFAULT );
-		renderer.clearCurrentComponentPreview();
+		renderer.clearComponentPreview();
 		gridSnapLocation = null;
 	}
 	
@@ -117,32 +121,32 @@ public class UIController {
 
 	@FXML 
 	public void onCellButtonClick( ActionEvent e ) {
-		selectedComponentType = ComponentType.CELL;
+		currentComponentType = ComponentType.CELL;
 	}
 
 	@FXML 
 	public void onResistorButtonClick( ActionEvent e ) {
-		selectedComponentType = ComponentType.RESISTOR;
+		currentComponentType = ComponentType.RESISTOR;
 	}
 
 	@FXML 
 	public void onCapacitorButtonClick( ActionEvent e ) {
-		selectedComponentType = ComponentType.CAPACITOR;
+		currentComponentType = ComponentType.CAPACITOR;
 	}
 
 	@FXML 
 	public void onVoltmeterButtonClick( ActionEvent e ) {
-		selectedComponentType = ComponentType.VOLTMETER;
+		currentComponentType = ComponentType.VOLTMETER;
 	}
 
 	@FXML 
 	public void onAmmeterButtonClick( ActionEvent e ) {
-		selectedComponentType = ComponentType.AMMETER;
+		currentComponentType = ComponentType.AMMETER;
 	}
 
 	@FXML 
 	public void onKeyButtonClick( ActionEvent e ) {
-		selectedComponentType = ComponentType.KEY;
+		currentComponentType = ComponentType.KEY;
 	}
 
 	@FXML 

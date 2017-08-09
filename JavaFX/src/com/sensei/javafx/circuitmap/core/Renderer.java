@@ -4,7 +4,8 @@ import java.util.ArrayDeque;
 
 import com.sensei.javafx.circuitmap.core.components.Component;
 
-import javafx.geometry.Point2D;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
@@ -12,8 +13,7 @@ public class Renderer {
 	
 	private ArrayDeque<Component> drawnComponents = null;
 	private ArrayDeque<Component> undoneComponents = null;
-	private Component currentComponent = null;
-	
+	private ObjectProperty<Component> currentComponent = null;
 	private boolean canDraw = true;
 	
 	private Canvas previewCanvas = null;
@@ -23,23 +23,25 @@ public class Renderer {
 		this.previewCanvas = preview;
 		this.mainCanvas = main;
 		
+		currentComponent = new SimpleObjectProperty<>();
+		
 		drawnComponents = new ArrayDeque<>();
 		undoneComponents = new ArrayDeque<>();
 	}
 	
-	public void setCurrentComponent( Component c ) {
-		this.currentComponent = c;
+	public ObjectProperty<Component> currentComponent() {
+		return currentComponent;
 	}
 	
-	public void previewCurrentComponentAt( Point2D location ) {
+	public void previewCurrentComponent() {
 
 		canDraw = true;
-		drawnComponents.forEach( (c) -> {
-			double x = location.getX();
-			double y = location.getY();
+		drawnComponents.forEach( (c) -> {			
+			double x = currentComponent.get().getStart().getX();
+			double y = currentComponent.get().getStart().getY();
 			
-			double cStartX = c.getStart().getX()-currentComponent.getWidth()+0.5;
-			double cStartY = c.getStart().getY()-currentComponent.getHeight()+0.5;
+			double cStartX = c.getStart().getX()-currentComponent.get().getWidth()+0.5;
+			double cStartY = c.getStart().getY()-currentComponent.get().getHeight()+0.5;
 			double cEndX = c.getEnd().getX()-0.5;
 			double cEndY = c.getEnd().getY()-0.5;
 			
@@ -56,22 +58,19 @@ public class Renderer {
 			previewCanvas.getGraphicsContext2D().setStroke( Color.BLACK );
 			previewCanvas.getGraphicsContext2D().setFill( Color.BLACK );			
 		}
-		currentComponent.erase( previewCanvas.getGraphicsContext2D() );
-		currentComponent.setLocation( location );
-		currentComponent.render( previewCanvas.getGraphicsContext2D() );		
+		currentComponent.get().erase( previewCanvas.getGraphicsContext2D() );
+		currentComponent.get().render( previewCanvas.getGraphicsContext2D() );		
 	}
 	
-	public void clearCurrentComponentPreview() {
-		currentComponent.erase( previewCanvas.getGraphicsContext2D() );
+	public void clearComponentPreview() {
+		currentComponent.get().erase( previewCanvas.getGraphicsContext2D() );
 	}
 	
-	public void drawCurrentComponentAt( Point2D location ) {
+	public void drawCurrentComponent(){
 
 		if( canDraw ) {
-			currentComponent.setLocation( location );
-			currentComponent.render( mainCanvas.getGraphicsContext2D() );
-			drawnComponents.push( currentComponent );
-			currentComponent = null;
+			currentComponent.get().render( mainCanvas.getGraphicsContext2D() );
+			drawnComponents.push( currentComponent.get() );
 		}
 	}
 	
