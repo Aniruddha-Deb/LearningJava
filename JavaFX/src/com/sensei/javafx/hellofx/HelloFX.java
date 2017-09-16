@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 
 public class HelloFX extends Application{
 
-	int fs = 48;
-	
 	@Override
 	public void start( Stage primaryStage ) throws Exception {
 		
@@ -23,16 +21,15 @@ public class HelloFX extends Application{
 		root.getChildren().add( c );
 		GraphicsContext g = c.getGraphicsContext2D();
 		
-		render( g, fs);
-		
 		Scene s = new Scene( root, 500, 500 );
 		
 		primaryStage.setTitle( "Hello FX!" );
 		primaryStage.setScene( s );
-		primaryStage.show();
+		primaryStage.show();		
 	}
 	
 	public void render(GraphicsContext g, int fs) {
+		
 		Text t = new Text( "C" );
 		t.setFont( new Font( "Helvetica", fs ) );
 		
